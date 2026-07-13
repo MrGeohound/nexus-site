@@ -133,6 +133,8 @@ export default function Hero() {
                 <span className="text-[#C8A96A] text-xs mx-4">✦</span>
                 <span className="text-[#F8F3EA] uppercase tracking-[0.2em] font-jakarta text-sm font-bold cursor-default">Ninna Hub</span>
                 <span className="text-[#C8A96A] text-xs mx-4">✦</span>
+                <span className="text-[#F8F3EA] uppercase tracking-[0.2em] font-jakarta text-sm font-bold cursor-default">Daniele Almeida</span>
+                <span className="text-[#C8A96A] text-xs mx-4">✦</span>
               </div>
             ))}
           </div>

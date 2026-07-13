@@ -61,6 +61,22 @@ export default function Sponsors() {
               </a>
             </div>
           </div>
+
+          {/* Sponsor 4: Daniele Almeida */}
+          <div className="bg-[#F8F3EA]/5 border border-[#F8F3EA]/10 rounded-2xl p-8 md:p-12 flex flex-col items-center justify-center flex-1 max-w-[400px] hover:border-[#C8A96A]/30 hover:bg-[#F8F3EA]/10 transition-all duration-300">
+            <h3 className="text-[#F8F3EA] text-4xl md:text-5xl font-inter font-black tracking-widest mb-4 text-center">
+              DANIELE ALMEIDA
+            </h3>
+            <div className="w-12 h-[1px] bg-[#C8A96A]/50 mb-4"></div>
+            <div className="flex flex-col items-center gap-2 text-center">
+              <span className="text-[#F8F3EA]/60 text-sm font-jakarta uppercase tracking-widest">
+                Coffee Break
+              </span>
+              <a href="https://instagram.com/danielealmeida_cofeebreack" target="_blank" rel="noopener noreferrer" className="text-[#C8A96A] text-xs font-bold hover:text-[#F8F3EA] transition-colors">
+                @danielealmeida_cofeebreack
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
