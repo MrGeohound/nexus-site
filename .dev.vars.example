@@ -1,0 +1,11 @@
+# Secrets do backend (Cloudflare Functions/Worker). NÃO comitar o .dev.vars real.
+# No Cloudflare, defina em Settings > Environment variables (Pages) ou
+# `npx wrangler secret put NOME` (Worker).
+META_PIXEL_ID=1706951560594723
+META_CAPI_TOKEN=            # token da Conversions API (Events Manager > Configurações)
+WEBHOOK_SECRET=            # string aleatória forte (você define)
+# Poller (opcional):
+SYMPLA_TOKEN=              # token da API Sympla (s_token)
+SYMPLA_EVENT_ID=3454239
+# Teste (opcional): código do Test Events do Meta
+META_TEST_EVENT_CODE=

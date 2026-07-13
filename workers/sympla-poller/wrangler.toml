@@ -1,0 +1,23 @@
+name = "nexus-sympla-poller"
+main = "src/index.js"
+compatibility_date = "2026-01-01"
+
+# Roda a cada 15 minutos procurando novos pedidos aprovados na Sympla.
+[triggers]
+crons = ["*/15 * * * *"]
+
+# Binding de KV para deduplicação (crie o namespace e cole o id):
+# npx wrangler kv namespace create NEXUS_KV
+[[kv_namespaces]]
+binding = "NEXUS_KV"
+id = "SUBSTITUA_PELO_ID_DO_KV"
+
+# Vars públicas (não sensíveis):
+[vars]
+SYMPLA_EVENT_ID = "3454239"
+
+# Secrets (defina via CLI, NÃO no arquivo):
+#   npx wrangler secret put SYMPLA_TOKEN
+#   npx wrangler secret put META_PIXEL_ID
+#   npx wrangler secret put META_CAPI_TOKEN
+#   npx wrangler secret put WEBHOOK_SECRET
