@@ -35,7 +35,9 @@ export function startCheckout(offerId, opts = {}) {
       LAST_INTENT_KEY,
       JSON.stringify({
         offer: offer.id,
-        value: offer.preco,
+        unit_value: offer.preco,
+        quantity: offer.pessoas || 1,
+        value: Number(offer.preco || 0) * Number(offer.pessoas || 1),
         ...getAttribution(),
         ts: new Date().toISOString(),
       }),

@@ -26,7 +26,8 @@ Funciona com **Pluga / Zapier / Make** (ou webhook nativo, se seu plano Sympla t
 As Pages Functions já vão junto com o site (pasta `functions/`). No painel do Pages:
 - **Settings → Environment variables** (Production): `META_PIXEL_ID`, `META_CAPI_TOKEN`, `WEBHOOK_SECRET`, (opc.) `META_TEST_EVENT_CODE`.
 - **Settings → Functions → KV namespace bindings**: `NEXUS_KV` → o namespace criado.
-- Publique. O endpoint fica em: `https://www.siganexus.com.br/api/sympla-webhook?secret=SEU_SEGREDO`.
+- Publique. O endpoint fica em: `https://www.siganexus.com.br/api/sympla-webhook`.
+  Envie o segredo no header `x-nexus-secret` para evitar credenciais em URLs e logs.
 
 ### Ligar a Sympla ao endpoint (via automação)
 No Pluga/Zapier/Make: gatilho **"Novo pedido aprovado na Sympla"** → ação **Webhook (POST)**
@@ -35,8 +36,9 @@ O endpoint entende os campos comuns automaticamente; só dispara em status aprov
 
 ### Teste
 ```bash
-curl -X POST "https://www.siganexus.com.br/api/sympla-webhook?secret=SEU_SEGREDO" \
+curl -X POST "https://www.siganexus.com.br/api/sympla-webhook" \
   -H "Content-Type: application/json" \
+  -H "x-nexus-secret: SEU_WEBHOOK_SECRET" \
   -d '{"order":{"id":"TESTE123","order_status":"approved","email":"teste@exemplo.com","order_total_sale_price":247,"quantity":1}}'
 ```
 Confira no **Meta Events Manager → Test Events** (use `META_TEST_EVENT_CODE`).
@@ -64,6 +66,9 @@ Teste manual: `https://<worker>.workers.dev/?key=SEU_SEGREDO`.
 - **Nunca** dispara Purchase por clique nem por status não aprovado.
 - **Deduplicação**: `event_id = purchase_<order_id>` + KV → mesmo pedido nunca conta 2x
   (inclusive se webhook e poller rodarem juntos).
+- **Horário real**: quando a Sympla fornece a data de aprovação/pagamento, ela é
+  enviada em `event_time`. A Meta aceita backfill de no máximo 7 dias; pedidos
+  mais antigos são ignorados, nunca reclassificados artificialmente como venda nova.
 - **Match quality**: enviamos e-mail/telefone/nome com hash SHA-256. Se a automação
   também repassar `fbp`/`fbc`, o casamento melhora (campos já suportados no `capi.js`).
 - **Moeda**: BRL. **Valor**: aceita "R$ 1.234,56" ou número.

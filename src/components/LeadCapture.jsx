@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { MessageCircle, Check, ArrowRight } from 'lucide-react';
 import { submitLead } from '../lib/leads.js';
 import { waLink, MSG_DUVIDA } from '../lib/whatsapp.js';
@@ -32,11 +32,18 @@ export default function LeadCapture() {
       return;
     }
     setStatus('sending');
-    await submitLead({ ...form, origem: 'landing_lead_section' });
+    const result = await submitLead({ ...form, origem: 'landing_lead_section' });
+    if (!result.ok) {
+      setStatus('idle');
+      setError(
+        `Não conseguimos enviar agora. Tente novamente ou escreva para ${CONTACT.email}.`,
+      );
+      return;
+    }
     setStatus('done');
   };
 
-  const wa = waLink(MSG_DUVIDA);
+  const wa = CONTACT.whatsappNumero ? waLink(MSG_DUVIDA) : null;
 
   return (
     <section id="duvidas" className="bg-[#12333A] px-6 py-20 lg:px-[10%]">
@@ -63,15 +70,17 @@ export default function LeadCapture() {
               >
                 Ver ingressos <ArrowRight size={18} />
               </button>
-              <a
-                href={wa}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackWhatsappClick('lead_success')}
-                className="flex w-full items-center justify-center gap-2 rounded-full border border-[#C8A96A] px-6 py-3 font-bold uppercase tracking-wide text-[#F8F3EA] transition-colors hover:bg-[#C8A96A] hover:text-[#12333A] sm:w-auto"
-              >
-                <MessageCircle size={18} /> Falar no WhatsApp
-              </a>
+              {wa && (
+                <a
+                  href={wa}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackWhatsappClick('lead_success')}
+                  className="flex w-full items-center justify-center gap-2 rounded-full border border-[#C8A96A] px-6 py-3 font-bold uppercase tracking-wide text-[#F8F3EA] transition-colors hover:bg-[#C8A96A] hover:text-[#12333A] sm:w-auto"
+                >
+                  <MessageCircle size={18} /> Falar no WhatsApp
+                </a>
+              )}
             </div>
           </div>
         ) : (
@@ -87,15 +96,17 @@ export default function LeadCapture() {
                 Deixe seu contato e enviamos a programação, os valores e o aviso
                 de virada de lote. Sem spam.
               </p>
-              <a
-                href={wa}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackWhatsappClick('lead_section')}
-                className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#C8A96A] hover:underline"
-              >
-                <MessageCircle size={16} /> Prefiro falar no WhatsApp
-              </a>
+              {wa && (
+                <a
+                  href={wa}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackWhatsappClick('lead_section')}
+                  className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#C8A96A] hover:underline"
+                >
+                  <MessageCircle size={16} /> Prefiro falar no WhatsApp
+                </a>
+              )}
             </div>
 
             <form onSubmit={onSubmit} className="space-y-3">
