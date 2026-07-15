@@ -2,8 +2,8 @@
 // Serviço de leads / onboarding — adaptador com fallback
 // -----------------------------------------------------------------------------
 // - Se houver endpoint configurado (VITE_LEADS_ENDPOINT), envia via POST.
-// - Sem endpoint: registra o evento em analytics e guarda localmente.
-// - Nunca lança erro que quebre a UI: sempre retorna { ok, mode }.
+// - Sem entrega confirmada, guarda uma cópia local para recuperação, mas
+//   retorna ok=false. A interface nunca deve mostrar um falso sucesso.
 // =============================================================================
 
 import { LEADS } from '../config/site.js';
@@ -42,23 +42,22 @@ export async function submitLead(fields = {}) {
     ts: new Date().toISOString(),
   };
 
-  // Rastreia a conversão de lead (padroniza o funil).
-  track(EVENTS.LEAD, {
-    origem: fields.origem || 'form',
-    content_name: 'lead_nexus',
-  });
-
   if (LEADS.endpoint) {
     try {
       await post(LEADS.endpoint, payload);
+      // Só conta Lead quando o backend confirma a entrega.
+      track(EVENTS.LEAD, {
+        origem: fields.origem || 'form',
+        content_name: 'lead_nexus',
+      });
       return { ok: true, mode: 'endpoint' };
     } catch {
       saveLocal('leads', payload);
-      return { ok: true, mode: 'fallback' };
+      return { ok: false, mode: 'fallback' };
     }
   }
   saveLocal('leads', payload);
-  return { ok: true, mode: 'local' };
+  return { ok: false, mode: 'local' };
 }
 
 /**
@@ -72,20 +71,19 @@ export async function submitOnboarding(fields = {}) {
     ts: new Date().toISOString(),
   };
 
-  track(EVENTS.ONBOARDING_COMPLETE, { content_name: 'onboarding_nexus' });
-
   const endpoint = LEADS.onboardingEndpoint || LEADS.endpoint;
   if (endpoint) {
     try {
       await post(endpoint, payload);
+      track(EVENTS.ONBOARDING_COMPLETE, { content_name: 'onboarding_nexus' });
       return { ok: true, mode: 'endpoint' };
     } catch {
       saveLocal('onboarding', payload);
-      return { ok: true, mode: 'fallback' };
+      return { ok: false, mode: 'fallback' };
     }
   }
   saveLocal('onboarding', payload);
-  return { ok: true, mode: 'local' };
+  return { ok: false, mode: 'local' };
 }
 
 export default { submitLead, submitOnboarding };

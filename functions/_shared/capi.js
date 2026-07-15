@@ -6,7 +6,9 @@
 // Compatível com Cloudflare Workers/Pages Functions (Web Crypto).
 // =============================================================================
 
-const GRAPH_VERSION = 'v21.0';
+// Versão vigente da Graph API na revisão de julho/2026.
+const GRAPH_VERSION = 'v25.0';
+const MAX_EVENT_AGE_SECONDS = 7 * 24 * 60 * 60;
 
 // SHA-256 em hex de um valor normalizado (Meta exige PII com hash).
 async function sha256(value) {
@@ -30,12 +32,29 @@ async function sha256Phone(phone) {
  * @param {object} env  { META_PIXEL_ID, META_CAPI_TOKEN, META_TEST_EVENT_CODE? }
  * @param {object} order Dados normalizados do pedido.
  *   { orderId, value, currency='BRL', email, phone, firstName, lastName,
- *     quantity, eventSourceUrl, clientIp, userAgent, fbp, fbc,
+ *     quantity, eventTime, eventSourceUrl, clientIp, userAgent, fbp, fbc,
  *     utm:{source,medium,campaign,content,term} }
  */
 export async function sendPurchase(env, order) {
   if (!env.META_PIXEL_ID || !env.META_CAPI_TOKEN) {
     return { ok: false, skipped: true, reason: 'missing_meta_credentials' };
+  }
+
+  const now = Math.floor(Date.now() / 1000);
+  let actualEventTime = now;
+  if (order.eventTime) {
+    const raw = Number(order.eventTime);
+    const parsed = Number.isFinite(raw)
+      ? raw > 1_000_000_000_000
+        ? Math.floor(raw / 1000)
+        : Math.floor(raw)
+      : Math.floor(Date.parse(order.eventTime) / 1000);
+    if (Number.isFinite(parsed) && parsed > 0 && parsed <= now + 60) {
+      actualEventTime = parsed;
+    }
+  }
+  if (now - actualEventTime > MAX_EVENT_AGE_SECONDS) {
+    return { ok: false, skipped: true, reason: 'event_time_older_than_7_days' };
   }
 
   const userData = {
@@ -70,7 +89,7 @@ export async function sendPurchase(env, order) {
     data: [
       {
         event_name: 'Purchase',
-        event_time: Math.floor(Date.now() / 1000),
+        event_time: actualEventTime,
         action_source: 'website',
         event_source_url: order.eventSourceUrl || 'https://www.siganexus.com.br/',
         // event_id = orderId garante DEDUPLICAÇÃO (mesmo id nunca conta 2x).

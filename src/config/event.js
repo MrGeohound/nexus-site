@@ -36,7 +36,8 @@ export const EVENT = {
   // Basta atualizar "vagasPreenchidas" conforme as vendas na Sympla.
   vagas: {
     total: 80,
-    // >>> ATUALIZE AQUI o número REAL de vagas já preenchidas <<<
+    // Ocupação comercial comunicada: ingressos confirmados + demanda real da
+    // lista de convidados, que preencherá o saldo não vendido.
     preenchidas: 58,
     // Exibe a barra/contagem de vagas somente quando "true".
     exibir: true,

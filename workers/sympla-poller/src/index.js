@@ -58,11 +58,15 @@ async function processOrders(env) {
       firstName: firstName || undefined,
       lastName: rest.join(' ') || undefined,
       quantity: o.quantity || 1,
+      eventTime: o.approved_at || o.payment_date || o.order_date || o.created_at || o.updated_at,
       eventSourceUrl: 'https://www.siganexus.com.br/',
     });
     if (result.ok) {
       fired++;
       if (env.NEXUS_KV) await env.NEXUS_KV.put(`purchase:${orderId}`, new Date().toISOString(), { expirationTtl: 60 * 24 * 3600 });
+    } else if (result.skipped && result.reason === 'event_time_older_than_7_days') {
+      skipped++;
+      if (env.NEXUS_KV) await env.NEXUS_KV.put(`purchase:${orderId}`, 'skipped_old_event', { expirationTtl: 60 * 24 * 3600 });
     }
   }
   return { total: orders.length, fired, skipped };

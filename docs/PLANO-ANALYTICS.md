@@ -29,6 +29,12 @@ Extras por evento: `ticket_type, ticket_value, currency, content_name, origem`.
 
 ## Mapa Meta Pixel
 `ViewContent, AddToCart, InitiateCheckout, Lead, Purchase` (com `eventID` p/ dedupe).
+`view_pricing` permanece como evento customizado e não infla `ViewContent`.
+
+Eventos padrão ocorridos antes da decisão do banner ficam apenas em memória.
+Ao aceitar, são enviados para o Pixel; ao recusar, são descartados. O valor do
+Passaporte Duplo usa o total do pedido (2 × R$ 199 = R$ 398), com quantidade e
+valor unitário separados.
 
 ## GTM (recomendado)
 Se usar `VITE_GTM_ID`, configure as tags no GTM lendo o `dataLayer` (o `event` é o nome

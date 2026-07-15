@@ -3,11 +3,12 @@
 > Objetivo: quando alguém comprar na Sympla, o Zapier avisa nosso endpoint, que
 > dispara o **Purchase** no Meta (server-side). Tempo estimado: ~20 min.
 
-## Seu WEBHOOK_SECRET (já gerado — guarde)
-```
-dadd15ee198afcc344f1b3583e31235924a4800974dc9809
-```
-Use este valor no Cloudflare (passo 2) e na URL do Zapier (passo 3).
+## Antes de começar: gere o WEBHOOK_SECRET
+
+Gere um segredo aleatório forte e salve-o somente como Secret no Cloudflare e
+no cofre de credenciais da automação. **Nunca coloque o valor no repositório,
+em documentação ou na URL.** Se um segredo já foi commitado, trate-o como
+comprometido e faça a rotação antes de continuar.
 
 ---
 
@@ -33,7 +34,8 @@ No painel do projeto do site (Cloudflare → Workers & Pages → seu site):
    - Variable name: `NEXUS_KV` → Namespace: `NEXUS_KV`.
 4. **Redeploy** o site para as variáveis entrarem em vigor.
 
-Seu endpoint fica: `https://www.siganexus.com.br/api/sympla-webhook?secret=SEU_SEGREDO`
+Seu endpoint fica: `https://www.siganexus.com.br/api/sympla-webhook`. Envie o
+segredo no header `x-nexus-secret`.
 
 ## Passo 3 — Criar o Zap (Zapier)
 1. **Create Zap**.
@@ -42,7 +44,8 @@ Seu endpoint fica: `https://www.siganexus.com.br/api/sympla-webhook?secret=SEU_S
 3. **Filter** (Filtro do Zapier): continuar **somente se** `Order Status` = `A`
    (ou `approved`/`aprovado`). Isso evita disparar em pedido não pago.
 4. **Action**: **Webhooks by Zapier** → **POST**.
-   - **URL**: `https://www.siganexus.com.br/api/sympla-webhook?secret=dadd15ee198afcc344f1b3583e31235924a4800974dc9809`
+   - **URL**: `https://www.siganexus.com.br/api/sympla-webhook`
+   - **Header**: `x-nexus-secret: SEU_WEBHOOK_SECRET`
    - **Payload Type**: `json`
    - **Data** (mapear os campos do pedido Sympla):
      - `id` → ID do pedido
@@ -62,8 +65,9 @@ Seu endpoint fica: `https://www.siganexus.com.br/api/sympla-webhook?secret=SEU_S
 1. No Meta Events Manager → **Testar eventos**, deixe a tela aberta.
 2. Rode o teste do Zap (ou um `curl`):
 ```bash
-curl -X POST "https://www.siganexus.com.br/api/sympla-webhook?secret=dadd15ee198afcc344f1b3583e31235924a4800974dc9809" \
+curl -X POST "https://www.siganexus.com.br/api/sympla-webhook" \
   -H "Content-Type: application/json" \
+  -H "x-nexus-secret: SEU_WEBHOOK_SECRET" \
   -d '{"order":{"id":"TESTE123","order_status":"approved","email":"teste@exemplo.com","order_total_sale_price":247,"quantity":1}}'
 ```
 3. Em **Testar eventos**, deve aparecer um **Purchase** com valor 247, BRL.

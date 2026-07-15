@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CalendarPlus, MessageCircle, Share2, Check, ArrowRight } from 'lucide-react';
 import { EVENT, CONTACT } from '../config';
 import { googleCalendarUrl, downloadIcs } from '../lib/calendar.js';
@@ -14,6 +14,7 @@ export default function Obrigado() {
     acessibilidade: '', restricoes: '', consent: false,
   });
   const [status, setStatus] = useState('idle');
+  const [error, setError] = useState('');
 
   useEffect(() => {
     track(EVENTS.ONBOARDING_START, { page: 'obrigado' });
@@ -26,8 +27,18 @@ export default function Obrigado() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+    if (!form.nome.trim() || !form.whatsapp.trim() || !form.consent) {
+      setError('Preencha nome e WhatsApp e autorize o uso das informações.');
+      return;
+    }
     setStatus('sending');
-    await submitOnboarding(form);
+    const result = await submitOnboarding(form);
+    if (!result.ok) {
+      setStatus('idle');
+      setError(`Não conseguimos enviar agora. Escreva para ${CONTACT.email}.`);
+      return;
+    }
     setStatus('done');
   };
 
@@ -197,6 +208,8 @@ export default function Obrigado() {
                 perfil com a organização para facilitar conexões no evento.
               </span>
             </label>
+
+            {error && <p className="mt-4 text-sm text-[#E5896B]">{error}</p>}
 
             <button
               type="submit"

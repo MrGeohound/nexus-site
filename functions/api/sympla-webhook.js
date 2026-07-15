@@ -5,7 +5,8 @@
 // oferecer webhook) ou via automação (Pluga / Zapier / Make) — e dispara o
 // Purchase server-side na Conversions API do Meta.
 //
-// Segurança: exige o segredo em ?secret= ou header "x-nexus-secret".
+// Segurança: exige o header "x-nexus-secret". O parâmetro ?secret= continua
+// aceito apenas para compatibilidade com integrações existentes.
 // Deduplicação: usa KV (binding NEXUS_KV) para não contar o mesmo pedido 2x.
 // NUNCA dispara Purchase sem status aprovado.
 //
@@ -48,6 +49,8 @@ function normalizeOrder(body) {
     firstName: firstName || undefined,
     lastName: rest.join(' ') || undefined,
     quantity: o.quantity || (Array.isArray(o.tickets) ? o.tickets.length : 1),
+    eventTime:
+      o.approved_at || o.payment_date || o.order_date || o.created_at || o.updated_at,
     eventSourceUrl: o.event_source_url || 'https://www.siganexus.com.br/',
     utm: o.utm || {
       source: o.utm_source, medium: o.utm_medium, campaign: o.utm_campaign,

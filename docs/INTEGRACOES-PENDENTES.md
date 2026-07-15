@@ -21,15 +21,16 @@ de analytics, porém **não é chamado** em nenhum fluxo.
 
 ## 2. Meta Pixel + Conversions API (CAPI)
 - `VITE_META_PIXEL_ID` já ativa o Pixel (após consentimento).
-- Eventos mapeados: `view_event/view_pricing → ViewContent`, `select_ticket → AddToCart`,
+- Eventos mapeados: `view_event → ViewContent`, `select_ticket → AddToCart`,
   `initiate_checkout → InitiateCheckout`, `lead → Lead`, `purchase → Purchase`.
 - Cada evento já gera `event_id` para **deduplicação** quando a CAPI for implementada
   (server-side). A CAPI em si precisa de um backend com o token de acesso.
 
 ## 3. Backend de leads / CRM
-- Definir `VITE_LEADS_ENDPOINT` (e opcional `VITE_ONBOARDING_ENDPOINT`).
-- O endpoint recebe JSON com: campos do formulário + UTMs + `session_id` + timestamp.
-- Sugestão: Supabase (tabela `leads` / `onboarding`) ou automação (Zapier/Make → planilha/CRM).
+- **Backend implementado** em `/api/leads`, usando o mesmo binding `NEXUS_KV`.
+- Configure `LEADS_WEBHOOK_URL` para encaminhar cada lead imediatamente ao CRM,
+  Make ou Zapier. O KV funciona como cópia de segurança por 90 dias.
+- O endpoint recebe campos do formulário + UTMs + `session_id` + timestamp.
 
 ## 4. WhatsApp
 - Definir `VITE_WHATSAPP_NUMERO`. Sem número, os links abrem o compositor genérico.

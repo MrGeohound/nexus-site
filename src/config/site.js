@@ -11,7 +11,7 @@ const env = (typeof import.meta !== 'undefined' && import.meta.env) || {};
 // --- Contato / WhatsApp ------------------------------------------------------
 // Número no formato internacional, apenas dígitos (ex.: 5585999999999).
 export const CONTACT = {
-  whatsappNumero: env.VITE_WHATSAPP_NUMERO || '', // >>> preencha com o número oficial
+  whatsappNumero: env.VITE_WHATSAPP_NUMERO || '5585994354170',
   email: env.VITE_CONTATO_EMAIL || 'contato@siganexus.com.br',
 };
 
@@ -57,10 +57,10 @@ export const ANALYTICS = {
 };
 
 // --- Backend de leads/onboarding (opcional) ---------------------------------
-// Endpoint que recebe os POSTs de lead e onboarding. Sem endpoint, os dados
-// são apenas rastreados via analytics e guardados localmente (fallback).
+// Endpoint que recebe os POSTs de lead e onboarding. A Pages Function padrão
+// exige NEXUS_KV ou LEADS_WEBHOOK_URL e nunca confirma uma entrega inexistente.
 export const LEADS = {
-  endpoint: env.VITE_LEADS_ENDPOINT || '',       // ex.: https://api.exemplo.com/leads
+  endpoint: env.VITE_LEADS_ENDPOINT || '/api/leads',
   onboardingEndpoint: env.VITE_ONBOARDING_ENDPOINT || '',
 };
 

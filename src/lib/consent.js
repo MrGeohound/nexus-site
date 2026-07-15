@@ -7,6 +7,10 @@
 // =============================================================================
 
 import { ANALYTICS } from '../config/site.js';
+import {
+  clearPendingMetaEvents,
+  flushPendingMetaEvents,
+} from './analytics.js';
 
 const CONSENT_KEY = 'nexus_consent_v1';
 
@@ -35,7 +39,15 @@ export function setConsent(accepted) {
   } catch {
     /* ignora */
   }
-  if (accepted) loadTrackingScripts();
+  window.__NEXUS_MARKETING_CONSENT__ = !!accepted;
+  if (accepted) {
+    loadTrackingScripts();
+    // O stub do fbq já existe neste ponto. Assim, ViewContent/checkout que
+    // ocorreram antes da decisão entram na fila oficial do Pixel.
+    flushPendingMetaEvents();
+  } else {
+    clearPendingMetaEvents();
+  }
   // Sinaliza para o Google Consent Mode, se presente.
   if (typeof window.gtag === 'function') {
     window.gtag('consent', 'update', {
@@ -69,7 +81,6 @@ export function loadTrackingScripts() {
 
   // --- Meta Pixel -----------------------------------------------------------
   if (ANALYTICS.metaPixelId) {
-    /* eslint-disable */
     !(function (f, b, e, v, n, t, s) {
       if (f.fbq) return;
       n = f.fbq = function () {
@@ -88,14 +99,23 @@ export function loadTrackingScripts() {
     })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
     window.fbq('init', ANALYTICS.metaPixelId);
     window.fbq('track', 'PageView');
-    /* eslint-enable */
   }
 }
 
 // No boot: se já houver consentimento salvo, recarrega os scripts.
 export function initConsent() {
   const c = getConsent();
-  if (c && c.analytics) loadTrackingScripts();
+  if (!c) {
+    window.__NEXUS_MARKETING_CONSENT__ = null;
+    return;
+  }
+  window.__NEXUS_MARKETING_CONSENT__ = !!c.marketing;
+  if (c.analytics && c.marketing) {
+    loadTrackingScripts();
+    flushPendingMetaEvents();
+  } else {
+    clearPendingMetaEvents();
+  }
 }
 
 export default { getConsent, hasDecision, setConsent, loadTrackingScripts, initConsent };

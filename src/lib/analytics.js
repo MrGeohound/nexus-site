@@ -36,12 +36,17 @@ export const EVENTS = {
 // Mapeia eventos internos -> eventos padrão do Meta Pixel.
 const META_MAP = {
   view_event: 'ViewContent',
-  view_pricing: 'ViewContent',
   select_ticket: 'AddToCart',
   initiate_checkout: 'InitiateCheckout',
   lead: 'Lead',
   purchase: 'Purchase',
 };
+
+// Eventos de conversão que acontecem antes da decisão do banner ficam apenas
+// em memória. Se o visitante aceitar os cookies, são enviados na mesma sessão;
+// se recusar, são descartados. Nada é persistido no navegador.
+const pendingMetaEvents = [];
+const META_QUEUE_LIMIT = 20;
 
 function base() {
   if (typeof window === 'undefined') return {};
@@ -74,6 +79,56 @@ function eventId() {
   );
 }
 
+function metaParams(payload) {
+  const params = {};
+  const value = payload.ticket_value ?? payload.value;
+  const quantity = Number(payload.quantity || payload.num_items || 1);
+  const unitValue = Number(payload.unit_value ?? value ?? 0);
+
+  if (value != null) {
+    params.value = Number(value);
+    params.currency = payload.currency || 'BRL';
+  }
+  if (payload.content_name) params.content_name = payload.content_name;
+  if (payload.content_category) {
+    params.content_category = payload.content_category;
+  }
+  if (payload.ticket_type) {
+    params.content_ids = [payload.ticket_type];
+    params.content_type = 'product';
+    params.num_items = quantity;
+    params.contents = [
+      {
+        id: payload.ticket_type,
+        quantity,
+        item_price: unitValue,
+      },
+    ];
+  }
+  return params;
+}
+
+function sendMetaEvent({ name, params, eventID, custom = false }) {
+  if (typeof window.fbq !== 'function') return false;
+  window.fbq(custom ? 'trackCustom' : 'track', name, params, { eventID });
+  return true;
+}
+
+function shouldQueueMeta() {
+  return window.__NEXUS_MARKETING_CONSENT__ !== false;
+}
+
+export function flushPendingMetaEvents() {
+  if (typeof window === 'undefined' || typeof window.fbq !== 'function') return 0;
+  const queued = pendingMetaEvents.splice(0, pendingMetaEvents.length);
+  queued.forEach(sendMetaEvent);
+  return queued.length;
+}
+
+export function clearPendingMetaEvents() {
+  pendingMetaEvents.splice(0, pendingMetaEvents.length);
+}
+
 /**
  * Dispara um evento padronizado para todos os provedores disponíveis.
  * @param {string} name  Nome do evento (use EVENTS.*)
@@ -93,24 +148,25 @@ export function track(name, params = {}) {
   }
 
   // 3) Meta Pixel (fbq)
-  if (typeof window.fbq === 'function') {
-    const metaName = META_MAP[name];
-    const metaParams = {};
-    if (payload.ticket_value != null) metaParams.value = payload.ticket_value;
-    if (payload.value != null) metaParams.value = payload.value;
-    if (metaParams.value != null) metaParams.currency = payload.currency || 'BRL';
-    if (payload.content_name) metaParams.content_name = payload.content_name;
+  const metaName = META_MAP[name];
+  const metaEvent = {
+    name: metaName || name,
+    params: metaParams(payload),
+    eventID: payload.event_id,
+    custom: !metaName,
+  };
 
-    if (metaName) {
-      window.fbq('track', metaName, metaParams, { eventID: payload.event_id });
-    } else {
-      window.fbq('trackCustom', name, metaParams, { eventID: payload.event_id });
-    }
+  if (typeof window.fbq === 'function') {
+    sendMetaEvent(metaEvent);
+  } else if (metaName && shouldQueueMeta()) {
+    // Só eventos padrão do funil são recuperados após o aceite. Eventos de
+    // navegação/engajamento continuam disponíveis no dataLayer/GA4.
+    pendingMetaEvents.push(metaEvent);
+    if (pendingMetaEvents.length > META_QUEUE_LIMIT) pendingMetaEvents.shift();
   }
 
   // 4) Debug
   if (ANALYTICS.debug) {
-    // eslint-disable-next-line no-console
     console.log('%c[analytics]', 'color:#C8A96A', name, payload);
   }
 }
@@ -119,13 +175,23 @@ export function track(name, params = {}) {
 export const trackPageView = (extra) =>
   track(EVENTS.PAGE_VIEW, { ...extra });
 
-export const trackViewEvent = () => track(EVENTS.VIEW_EVENT);
+export const trackViewEvent = () =>
+  track(EVENTS.VIEW_EVENT, {
+    content_name: 'NEXUS — Conexão de Verdade',
+    content_category: 'Evento empresarial',
+  });
+
+const offerTotal = (offer) =>
+  Number(offer?.preco || 0) * Number(offer?.pessoas || 1);
 
 export const trackSelectTicket = (offer) =>
   track(EVENTS.SELECT_TICKET, {
     ticket_type: offer?.id,
     content_name: offer?.nome,
-    ticket_value: offer?.preco,
+    content_category: 'Ingresso de evento',
+    ticket_value: offerTotal(offer),
+    unit_value: offer?.preco,
+    quantity: offer?.pessoas || 1,
     currency: 'BRL',
   });
 
@@ -133,7 +199,10 @@ export const trackInitiateCheckout = (offer) =>
   track(EVENTS.INITIATE_CHECKOUT, {
     ticket_type: offer?.id,
     content_name: offer?.nome,
-    ticket_value: offer?.preco,
+    content_category: 'Ingresso de evento',
+    ticket_value: offerTotal(offer),
+    unit_value: offer?.preco,
+    quantity: offer?.pessoas || 1,
     currency: 'BRL',
   });
 
