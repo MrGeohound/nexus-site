@@ -1,9 +1,15 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Check } from 'lucide-react';
 import { OFFERS } from '../config';
 import { startCheckout } from '../lib/checkout.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import ScarcityBadge from './ScarcityBadge';
+
+const formatPrice = (value) =>
+  Number(value).toLocaleString('pt-BR', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
 
 export default function Pricing() {
   const ref = useRef(null);
@@ -35,8 +41,13 @@ export default function Pricing() {
             <span className="bg-gradient-to-r from-[#B86B4B] to-[#C8A96A] bg-clip-text text-transparent">NEXUS</span>
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-[#12333A]/60">
-            As vagas são limitadas para manter a qualidade das conversas, a proximidade entre os participantes e a experiência de networking real.
+            Use o cupom SOCIAL na Sympla e garanta 50% de desconto. Cada participante entrega 1 kg de alimento não perecível na entrada.
           </p>
+        </div>
+
+        <div className="mx-auto mb-8 max-w-2xl rounded-2xl border border-[#B86B4B]/25 bg-[#B86B4B]/10 px-6 py-4 text-center text-[#12333A]">
+          <p className="text-sm font-black uppercase tracking-[0.2em] text-[#B86B4B]">Oferta Social · 50% OFF</p>
+          <p className="mt-1 font-semibold">Ingressos a partir de R$ 99,50 por pessoa</p>
         </div>
 
         <div className="mb-12 flex justify-center">
@@ -66,15 +77,16 @@ export default function Pricing() {
                 </h3>
 
                 {offer.precoDe && (
-                  <p className={`mb-4 text-sm line-through ${featured ? 'text-[#F8F3EA]/40' : 'text-[#12333A]/40'}`}>
-                    De R$ {offer.precoDe}
+                  <p className={`mb-2 text-sm ${featured ? 'text-[#F8F3EA]/55' : 'text-[#12333A]/55'}`}>
+                    Preço regular:{' '}
+                    <span className="line-through">R$ {formatPrice(offer.precoDe)}{offer.unidade || ''}</span>
                   </p>
                 )}
 
                 <div className="mb-2 flex items-baseline gap-2">
                   <span className={`text-2xl ${featured ? 'text-[#F8F3EA]/50' : 'text-[#12333A]/50'}`}>R$</span>
                   <span className={`text-5xl font-black tracking-tight ${featured ? 'text-[#F8F3EA]' : 'text-[#12333A]'}`}>
-                    {offer.preco}
+                    {formatPrice(offer.preco)}
                   </span>
                   {offer.unidade && (
                     <span className={featured ? 'text-[#F8F3EA]/40' : 'text-[#12333A]/40'}>{offer.unidade}</span>
@@ -82,7 +94,9 @@ export default function Pricing() {
                 </div>
 
                 <p className={`mb-8 text-sm uppercase tracking-widest ${featured ? 'text-[#F8F3EA]/50' : 'font-bold text-[#B86B4B]'}`}>
-                  {offer.id === 'duplo' ? 'A partir de 2 ingressos' : 'NEXUS - Conexão de Verdade'}
+                  {offer.id === 'duplo'
+                    ? `R$ ${formatPrice(offer.preco * offer.pessoas)} no total · cupom SOCIAL`
+                    : 'Com o cupom SOCIAL na Sympla'}
                 </p>
 
                 <ul className="mb-10 space-y-4">
@@ -102,7 +116,7 @@ export default function Pricing() {
                       : 'block w-full rounded-full border border-[#C8A96A] py-4 text-center font-bold uppercase tracking-widest text-[#12333A] transition-colors hover:bg-[#C8A96A]'
                   }
                 >
-                  {offer.id === 'duplo' ? 'Comprar Passe Duplo' : 'Comprar Ingresso'}
+                  Garantir com 50% OFF
                 </button>
               </div>
             );
@@ -110,7 +124,7 @@ export default function Pricing() {
         </div>
 
         <p className="mx-auto max-w-lg text-center text-sm text-[#12333A]/40">
-          Depois de garantir sua vaga, você receberá as informações do evento e orientações de chegada no seu e-mail.
+          Aplique o cupom SOCIAL na Sympla. Para validar o desconto, cada participante deverá entregar 1 kg de alimento não perecível na entrada do evento.
         </p>
       </div>
     </section>
