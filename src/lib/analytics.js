@@ -36,8 +36,6 @@ export const EVENTS = {
 // Mapeia eventos internos -> eventos padrão do Meta Pixel.
 const META_MAP = {
   view_event: 'ViewContent',
-  select_ticket: 'AddToCart',
-  initiate_checkout: 'InitiateCheckout',
   lead: 'Lead',
   purchase: 'Purchase',
 };
