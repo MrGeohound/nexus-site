@@ -21,8 +21,10 @@ de analytics, porém **não é chamado** em nenhum fluxo.
 
 ## 2. Meta Pixel + Conversions API (CAPI)
 - `VITE_META_PIXEL_ID` já ativa o Pixel (após consentimento).
-- Eventos mapeados: `view_event → ViewContent`, `select_ticket → AddToCart`,
-  `initiate_checkout → InitiateCheckout`, `lead → Lead`, `purchase → Purchase`.
+- Eventos mapeados: `view_event → ViewContent`, `select_ticket` e
+  `initiate_checkout` personalizados na landing, `lead → Lead` e
+  `purchase → Purchase`. A Sympla é a fonte dos eventos padrão `AddToCart` e
+  `InitiateCheckout`, evitando dupla contagem.
 - Cada evento já gera `event_id` para **deduplicação** quando a CAPI for implementada
   (server-side). A CAPI em si precisa de um backend com o token de acesso.
 

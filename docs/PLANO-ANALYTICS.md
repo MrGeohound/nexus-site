@@ -28,7 +28,10 @@ device, viewport, timestamp, page_path, event_id`.
 Extras por evento: `ticket_type, ticket_value, currency, content_name, origem`.
 
 ## Mapa Meta Pixel
-`ViewContent, AddToCart, InitiateCheckout, Lead, Purchase` (com `eventID` p/ dedupe).
+- Landing: `ViewContent`, `select_ticket` e `initiate_checkout` (os dois últimos
+  personalizados para medir a saída sem duplicar os eventos da Sympla).
+- Sympla: `AddToCart` e `InitiateCheckout` padrão.
+- Conversão: `Lead` e `Purchase` (com `eventID` para deduplicação).
 `view_pricing` permanece como evento customizado e não infla `ViewContent`.
 
 Eventos padrão ocorridos antes da decisão do banner ficam apenas em memória.
