@@ -8,6 +8,8 @@ import Home from './pages/Home';
 import Obrigado from './pages/Obrigado';
 import Indique from './pages/Indique';
 import Privacidade from './pages/Privacidade';
+import HomeV2 from './pages/HomeV2';
+import HomeV3 from './pages/HomeV3';
 
 function Routes() {
   const { path } = useRouter();
@@ -26,6 +28,10 @@ function Routes() {
       return <Indique />;
     case '/privacidade':
       return <Privacidade />;
+    case '/v2':
+      return <HomeV2 />;
+    case '/v3':
+      return <HomeV3 />;
     default:
       return <Home />;
   }
