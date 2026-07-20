@@ -13,7 +13,7 @@ export default function HeroV2() {
         <img 
           src="/assets/hero-v2.jpg" 
           alt="NEXUS Happy Hour" 
-          className="w-full h-full object-cover" 
+          className="w-full h-full object-cover object-[center_25%] md:object-[center_20%]" 
         />
       </div>
 
