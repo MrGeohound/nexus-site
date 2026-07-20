@@ -18,15 +18,15 @@ export default function HeroV2() {
       </div>
 
       {/* Cinematic Overlays */}
-      {/* Base dark tint */}
-      <div className="absolute inset-0 z-0 bg-[#12333A]/70"></div>
+      {/* Base dark tint - reduced opacity */}
+      <div className="absolute inset-0 z-0 bg-[#12333A]/20"></div>
       
-      {/* Vignette effect */}
-      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(18,51,58,0.9)_100%)]"></div>
+      {/* Vignette effect - softer */}
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,transparent_20%,rgba(18,51,58,0.8)_100%)]"></div>
       
-      {/* Gradient for text readability */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#12333A] via-[#12333A]/80 to-transparent"></div>
-      <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#12333A] via-transparent to-[#12333A]/80 pointer-events-none"></div>
+      {/* Gradient for text readability - focused on bottom */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#12333A]/80 via-[#12333A]/50 to-transparent"></div>
+      <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#12333A] via-transparent to-transparent pointer-events-none"></div>
 
       {/* Grid System */}
       <div className="absolute inset-0 z-0 hidden lg:flex justify-between w-full pointer-events-none opacity-20">

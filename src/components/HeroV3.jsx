@@ -24,7 +24,7 @@ export default function HeroV3() {
         </h1>
 
         <p className="font-inter text-xl md:text-2xl text-white/70 max-w-2xl leading-relaxed mb-10">
-          O NEXUS reúne quem decide, quem investe e quem fatura. Faltam 4 dias para o encontro que vai definir as parcerias do próximo semestre.
+          O NEXUS reúne quem decide, quem investe e quem fatura. Faltam 4 dias para o evento e restam apenas as últimas vagas do nosso limite estrito de 80 participantes.
         </p>
 
         <div className="w-full sm:w-auto mb-12">
@@ -39,7 +39,7 @@ export default function HeroV3() {
 
         <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16 border-t border-white/10 pt-10 mt-4 w-full justify-center">
           <div className="text-center">
-            <p className="text-4xl font-black text-[#C8A96A] mb-1">100+</p>
+            <p className="text-4xl font-black text-[#C8A96A] mb-1">58 <span className="text-xl text-white/40">/ 80</span></p>
             <p className="text-xs uppercase tracking-widest text-white/50">Empresários Confirmados</p>
           </div>
           <div className="text-center">
