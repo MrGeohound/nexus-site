@@ -10,6 +10,7 @@ import Indique from './pages/Indique';
 import Privacidade from './pages/Privacidade';
 import HomeV2 from './pages/HomeV2';
 import HomeV3 from './pages/HomeV3';
+import Avaliacao from './pages/Avaliacao';
 
 function Routes() {
   const { path } = useRouter();
@@ -32,6 +33,8 @@ function Routes() {
       return <HomeV2 />;
     case '/v3':
       return <HomeV3 />;
+    case '/avaliacao':
+      return <Avaliacao />;
     default:
       return <Home />;
   }
