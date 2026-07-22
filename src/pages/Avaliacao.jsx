@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Check, ArrowRight, Share2 } from 'lucide-react';
+import { Check, ArrowRight, MessageCircle, Link2 } from 'lucide-react';
 import { EVENT } from '../config';
 import { submitSurvey } from '../lib/survey.js';
 import { track } from '../lib/analytics.js';
-import { navigate } from '../lib/router.jsx';
 
 const MARCOU = [
   'Conteúdo / palestras',
@@ -12,6 +11,14 @@ const MARCOU = [
   'Happy hour (vinhos e finger foods)',
   'Organização',
 ];
+
+// Convite à lista de espera da PRÓXIMA edição (sem data definida).
+const SHARE_URL =
+  'https://siganexus.com.br/?utm_source=indicacao&utm_medium=referral&utm_campaign=lista_espera';
+const SHARE_MSG =
+  'Participei do NEXUS — Conexão de Verdade, um encontro de conexões intencionais entre ' +
+  'empresários, líderes e profissionais em Fortaleza. Vai ter nova edição! Entre na lista ' +
+  'de espera para ser avisado(a) em primeira mão: ' + SHARE_URL;
 
 export default function Avaliacao() {
   const [form, setForm] = useState({
@@ -30,6 +37,7 @@ export default function Avaliacao() {
   });
   const [status, setStatus] = useState('idle'); // idle | sending | done
   const [error, setError] = useState('');
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     track('survey_start', { page: 'avaliacao' });
@@ -43,6 +51,17 @@ export default function Avaliacao() {
         ? f.marcou.filter((x) => x !== item)
         : [...f.marcou, item],
     }));
+
+  const copyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(SHARE_URL);
+      setCopied(true);
+      track('share_event', { canal: 'link_lista' });
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      /* ignora */
+    }
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -61,6 +80,7 @@ export default function Avaliacao() {
     'w-full rounded-xl border border-[#F8F3EA]/15 bg-[#12333A] px-4 py-3 text-[#F8F3EA] placeholder-[#F8F3EA]/40 outline-none focus:border-[#C8A96A]';
 
   if (status === 'done') {
+    const wa = `https://wa.me/?text=${encodeURIComponent(SHARE_MSG)}`;
     return (
       <main className="min-h-screen bg-[#12333A] px-6 py-16 text-[#F8F3EA] lg:px-[10%]">
         <div className="mx-auto max-w-xl text-center">
@@ -72,12 +92,32 @@ export default function Avaliacao() {
             Sua opinião ajuda a tornar o próximo NEXUS ainda melhor.
             {form.consentDepoimento && ' E obrigado por autorizar o uso do seu depoimento!'}
           </p>
-          <button
-            onClick={() => navigate('/indique')}
-            className="inline-flex items-center gap-2 rounded-full bg-[#B86B4B] px-6 py-3 font-bold uppercase tracking-wide text-[#F8F3EA] hover:bg-[#9F573E]"
-          >
-            <Share2 size={18} /> Indicar quem deveria estar na próxima
-          </button>
+
+          <div className="rounded-2xl border border-[#F8F3EA]/10 bg-[#F8F3EA]/[0.03] p-6 text-left">
+            <p className="mb-1 text-center font-bold text-[#F8F3EA]">Vai ter nova edição do NEXUS.</p>
+            <p className="mb-5 text-center text-sm text-[#F8F3EA]/60">
+              Quem deveria estar na próxima sala com você? Convide — eles entram na lista de
+              espera e são avisados em primeira mão, assim que a data for definida.
+            </p>
+            <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+              <a
+                href={wa}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => track('share_event', { canal: 'whatsapp_lista' })}
+                className="flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3 font-bold text-[#0b3d24] transition-opacity hover:opacity-90"
+              >
+                <MessageCircle size={18} /> Convidar no WhatsApp
+              </a>
+              <button
+                onClick={copyLink}
+                className="flex items-center justify-center gap-2 rounded-full border border-[#C8A96A] px-6 py-3 font-bold text-[#F8F3EA] transition-colors hover:bg-[#C8A96A] hover:text-[#12333A]"
+              >
+                {copied ? <Check size={18} /> : <Link2 size={18} />}
+                {copied ? 'Link copiado!' : 'Copiar link de convite'}
+              </button>
+            </div>
+          </div>
         </div>
       </main>
     );
