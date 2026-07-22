@@ -30,6 +30,7 @@ export default function Avaliacao() {
     empresa: '',
     instagram: '',
     linkedin: '',
+    whatsapp: '',
     consentDepoimento: false,
     consentFoto: false,
     melhoria: '',
@@ -223,6 +224,7 @@ export default function Avaliacao() {
           <div className="grid gap-4 sm:grid-cols-2">
             <input className={inputCls} placeholder="Seu nome" value={form.nome} onChange={(e) => set('nome', e.target.value)} />
             <input className={inputCls} placeholder="Empresa / cargo" value={form.empresa} onChange={(e) => set('empresa', e.target.value)} />
+            <input className={inputCls} placeholder="WhatsApp (com DDD)" inputMode="tel" value={form.whatsapp} onChange={(e) => set('whatsapp', e.target.value)} />
             <input className={inputCls} placeholder="Instagram (@) — opcional" value={form.instagram} onChange={(e) => set('instagram', e.target.value)} />
             <input className={inputCls} placeholder="LinkedIn — opcional" value={form.linkedin} onChange={(e) => set('linkedin', e.target.value)} />
           </div>

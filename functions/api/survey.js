@@ -36,6 +36,7 @@ export async function onRequestPost(context) {
     depoimento: (body.depoimento || '').toString().slice(0, 600),
     nome: (body.nome || '').toString().slice(0, 120),
     empresa: (body.empresa || '').toString().slice(0, 160),
+    whatsapp: (body.whatsapp || '').toString().slice(0, 40),
     instagram: (body.instagram || '').toString().slice(0, 120),
     linkedin: (body.linkedin || '').toString().slice(0, 200),
     consentDepoimento: !!body.consentDepoimento,
@@ -77,7 +78,7 @@ export async function onRequestGet(context) {
   items.sort((a, b) => (a.ts < b.ts ? 1 : -1));
 
   if (url.searchParams.get('format') === 'csv') {
-    const cols = ['ts', 'nota', 'conexao', 'depoimento', 'nome', 'empresa', 'instagram', 'linkedin', 'consentDepoimento', 'consentFoto', 'melhoria', 'proximaEdicao', 'utm_source', 'utm_campaign'];
+    const cols = ['ts', 'nota', 'conexao', 'depoimento', 'nome', 'empresa', 'whatsapp', 'instagram', 'linkedin', 'consentDepoimento', 'consentFoto', 'melhoria', 'proximaEdicao', 'utm_source', 'utm_campaign'];
     const esc = (s) => `"${String(s ?? '').replace(/"/g, '""')}"`;
     const rows = [cols.join(',')].concat(items.map((it) => cols.map((c) => esc(Array.isArray(it[c]) ? it[c].join('|') : it[c])).join(',')));
     return new Response(rows.join('\n'), {
