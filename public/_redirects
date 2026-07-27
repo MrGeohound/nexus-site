@@ -1,2 +1,4 @@
-# SPA fallback (Cloudflare Pages / Netlify): rotas client-side (/obrigado, /indique, /privacidade)
-/*    /index.html   200
+# SPA fallback (Cloudflare Pages / Netlify)
+# Garante que arquivos de assets ausentes não retornem HTML (evita erro de MIME type no browser)
+/assets/*  /assets/:splat  404
+/*         /index.html     200
