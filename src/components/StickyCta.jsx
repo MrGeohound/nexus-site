@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowRight } from 'lucide-react';
-import { EVENT, vagasRestantes, FEATURES } from '../config';
+import { ArrowRight, Star } from 'lucide-react';
+import { FEATURES } from '../config';
 import { track, EVENTS } from '../lib/analytics.js';
 import { navigate } from '../lib/router.jsx';
 
@@ -20,10 +20,8 @@ export default function StickyCta() {
 
   const onClick = () => {
     track(EVENTS.CLICK_PRIMARY_CTA, { origem: 'sticky_mobile' });
-    navigate('#pricing');
+    navigate('#lista-de-espera');
   };
-
-  const restantes = vagasRestantes();
 
   return (
     <div
@@ -35,21 +33,17 @@ export default function StickyCta() {
       <div className="flex items-center gap-3">
         <div className="min-w-0 flex-1">
           <p className="truncate text-sm font-bold text-[#F8F3EA]">
-            Garanta sua vaga no NEXUS
+            Lista VIP · 2ª Edição NEXUS
           </p>
-          {EVENT.vagas.exibir && (
-            <p className="truncate text-[11px] text-[#C8A96A]">
-              {restantes > 0
-                ? `Restam ${restantes} de ${EVENT.vagas.total} vagas`
-                : 'Últimas vagas'}
-            </p>
-          )}
+          <p className="truncate text-[11px] text-[#C8A96A] flex items-center gap-1">
+            <Star size={10} className="fill-[#C8A96A]" /> Nota 9,3 de satisfação
+          </p>
         </div>
         <button
           onClick={onClick}
           className="flex shrink-0 items-center gap-2 rounded-full bg-[#B86B4B] px-5 py-3 text-sm font-bold uppercase tracking-wide text-[#F8F3EA] transition-colors hover:bg-[#9F573E]"
         >
-          Garantir vaga
+          Lista VIP
           <ArrowRight size={16} />
         </button>
       </div>

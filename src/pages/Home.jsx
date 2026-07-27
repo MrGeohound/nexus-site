@@ -6,6 +6,7 @@ import TargetAudience from '../components/TargetAudience';
 import Schedule from '../components/Schedule';
 import Speakers from '../components/Speakers';
 import Organizadores from '../components/Organizadores';
+import Testimonials from '../components/Testimonials';
 import Sponsors from '../components/Sponsors';
 import Pricing from '../components/Pricing';
 import LeadCapture from '../components/LeadCapture';
@@ -27,6 +28,7 @@ export default function Home() {
       <Schedule />
       <Speakers />
       <Organizadores />
+      <Testimonials />
       <Sponsors />
       <Pricing />
       <LeadCapture />

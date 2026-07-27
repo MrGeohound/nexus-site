@@ -11,6 +11,7 @@ import Privacidade from './pages/Privacidade';
 import HomeV2 from './pages/HomeV2';
 import HomeV3 from './pages/HomeV3';
 import Avaliacao from './pages/Avaliacao';
+import Galeria from './pages/Galeria';
 
 function Routes() {
   const { path } = useRouter();
@@ -35,6 +36,8 @@ function Routes() {
       return <HomeV3 />;
     case '/avaliacao':
       return <Avaliacao />;
+    case '/galeria':
+      return <Galeria />;
     default:
       return <Home />;
   }
