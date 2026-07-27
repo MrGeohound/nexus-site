@@ -15,12 +15,12 @@ export default function Hero() {
       {/* ========================================================================= */}
       <div className="hidden lg:flex relative min-h-screen w-full flex-col justify-center overflow-hidden">
         
-        {/* Background Compilation Video (Desktop) - Anchored at the TOP to keep heads 100% visible */}
+        {/* Background Compilation Video (Desktop) */}
         <div className="absolute inset-0 z-0">
           <video 
             ref={videoRef} 
             src="/assets/nexus-highlights-2026.mp4"
-            className="w-full h-full object-cover object-top filter brightness-110 contrast-115" 
+            className="w-full h-full object-cover object-center filter brightness-110 contrast-115" 
             muted 
             loop 
             playsInline 
@@ -108,7 +108,7 @@ export default function Hero() {
           <video 
             ref={mobileVideoRef} 
             src="/assets/nexus-highlights-2026.mp4"
-            className="w-full h-full object-cover object-top filter brightness-110 contrast-115" 
+            className="w-full h-full object-cover object-center filter brightness-110 contrast-115" 
             muted 
             loop 
             playsInline 
