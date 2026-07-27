@@ -4,49 +4,29 @@ import { track, EVENTS } from '../lib/analytics.js';
 
 const faqs = [
   {
-    question: 'Quando e onde será o NEXUS?',
+    question: 'Quando será a 2ª Edição do NEXUS?',
     answer:
-      'Dia 23 de julho de 2026, das 16h30 às 22h, no Ninna Hub — Avenida Dom Manuel, 1020, Fortaleza/CE.',
+      'A data oficial da 2ª Edição será divulgada em breve. Cadastrando-se na Lista VIP, você receberá a confirmação da data e o link de inscrição com prioridade absoluta.',
   },
   {
-    question: 'Como funciona o Passaporte Duplo+?',
+    question: 'Como funcionou a 1ª Edição do NEXUS?',
     answer:
-      'É a opção para levar mais alguém estratégico (sócio, parceiro, cliente ou líder). O valor por pessoa fica mais vantajoso a partir de 2 ingressos. A compra é feita na Sympla como as demais.',
+      'A 1ª Edição foi realizada no Ninna Hub com 100% de ocupação. O evento reuniu empresários, executivos e líderes em um ambiente desenhado para conexões reais, palestras práticas e um happy hour exclusivo com nota 9,3 de satisfação.',
   },
   {
-    question: 'O evento é apenas para empresários?',
+    question: 'O cadastramento na Lista VIP garante o menor valor?',
     answer:
-      'O foco principal é o público empresarial, mas o evento também é indicado para executivos, gestores, profissionais liberais, consultores e especialistas que desejam ampliar conexões estratégicas.',
+      'Sim! Quem está na Lista VIP recebe o link de compra 24h antes da abertura pública e garante a condição exclusiva do Lote 1.',
   },
   {
-    question: 'Vai ter networking de verdade?',
+    question: 'O evento é exclusivo para empresários e líderes?',
     answer:
-      'Sim. O NEXUS foi criado justamente para fugir do modelo passivo de evento. Teremos atividades de conexão entre os participantes e momentos pensados para gerar conversas relevantes.',
+      'O foco é no público decisor: empresários, executivos, gestores e profissionais liberais que buscam gerar negócios, parcerias e conexões estratégicas de verdade.',
   },
   {
-    question: 'O happy hour está incluso?',
+    question: 'Posso levar um sócio ou convidado para a 2ª Edição?',
     answer:
-      'Sim. O evento contará com happy hour com vinho e finger foods ao final da programação.',
-  },
-  {
-    question: 'Posso transferir meu ingresso para outra pessoa?',
-    answer:
-      'A emissão e as regras de transferência do ingresso seguem a política da Sympla, plataforma oficial de venda. Consulte as condições no seu e-mail de confirmação ou fale com nosso suporte.',
-  },
-  {
-    question: 'Como funciona cancelamento e reembolso?',
-    answer:
-      'Compras realizadas pela Sympla seguem a política de reembolso da plataforma e a legislação aplicável. Em caso de dúvida, entre em contato com nosso suporte.',
-  },
-  {
-    question: 'Qual a vestimenta recomendada?',
-    answer:
-      'Ambiente de negócios: recomendamos traje social ou business casual, à vontade para uma noite de conexões e happy hour.',
-  },
-  {
-    question: 'As vagas são limitadas?',
-    answer:
-      'Sim. A limitação de vagas é importante para preservar a qualidade da experiência e das conexões.',
+      'Sim! Na liberação das vagas, teremos a opção de Passaporte Duplo/Corporativo com descontos para você levar sócios ou parceiros estratégicos.',
   },
 ];
 

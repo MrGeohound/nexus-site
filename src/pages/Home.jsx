@@ -2,15 +2,9 @@ import React from 'react';
 import Header from '../components/Header';
 import Hero from '../Hero';
 import About from '../components/About';
-import TargetAudience from '../components/TargetAudience';
-import Schedule from '../components/Schedule';
-import Speakers from '../components/Speakers';
-import Organizadores from '../components/Organizadores';
-import Testimonials from '../components/Testimonials';
 import Sponsors from '../components/Sponsors';
+import Testimonials from '../components/Testimonials';
 import Pricing from '../components/Pricing';
-import LeadCapture from '../components/LeadCapture';
-import Location from '../components/Location';
 import Faq from '../components/Faq';
 import Cta from '../components/Cta';
 import Footer from '../components/Footer';
@@ -24,15 +18,9 @@ export default function Home() {
       <Header />
       <Hero />
       <About />
-      <TargetAudience />
-      <Schedule />
-      <Speakers />
-      <Organizadores />
-      <Testimonials />
       <Sponsors />
+      <Testimonials />
       <Pricing />
-      <LeadCapture />
-      <Location />
       <Faq />
       <Cta />
       <Footer />
