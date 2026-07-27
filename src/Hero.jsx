@@ -15,12 +15,12 @@ export default function Hero() {
       {/* ========================================================================= */}
       <div className="hidden lg:flex relative min-h-screen w-full flex-col justify-center overflow-hidden">
         
-        {/* Background Compilation Video (Desktop) */}
+        {/* Background Custom Video (Desktop 16:9) */}
         <div className="absolute inset-0 z-0">
           <video 
             ref={videoRef} 
-            src="/assets/nexus-highlights-2026.mp4"
-            className="w-full h-full object-cover object-center filter brightness-110 contrast-115" 
+            src="/assets/video-hero-nexus.mp4"
+            className="w-full h-full object-cover object-center filter brightness-110 contrast-110" 
             muted 
             loop 
             playsInline 
@@ -99,16 +99,16 @@ export default function Hero() {
 
 
       {/* ========================================================================= */}
-      {/* MOBILE HERO (Video 16:9 Showcase First, Copy Card Second)                */}
+      {/* MOBILE HERO (Custom 16:9 Video Showcase First, Copy Card Second)          */}
       {/* ========================================================================= */}
       <div className="lg:hidden flex flex-col pt-20 px-4 pb-12">
         
-        {/* 16:9 Video Showcase Card (Main Highlight) */}
+        {/* 16:9 Custom Video Showcase Card (Main Highlight) */}
         <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-[#F8F3EA]/20 shadow-[0_15px_35px_rgba(0,0,0,0.6)] mb-6 bg-black">
           <video 
             ref={mobileVideoRef} 
-            src="/assets/nexus-highlights-2026.mp4"
-            className="w-full h-full object-cover object-center filter brightness-110 contrast-115" 
+            src="/assets/video-hero-nexus.mp4"
+            className="w-full h-full object-cover object-center filter brightness-105 contrast-110" 
             muted 
             loop 
             playsInline 
@@ -116,7 +116,7 @@ export default function Hero() {
           />
           
           {/* Overlay Gradient at the bottom of the 16:9 video */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#12333A] via-[#12333A]/30 to-transparent flex flex-col justify-end p-4">
+          <div className="absolute inset-0 bg-gradient-to-t from-[#12333A] via-[#12333A]/20 to-transparent flex flex-col justify-end p-4">
             <div className="flex items-center gap-2 mb-1 text-[#C8A96A]">
               <Play size={12} className="fill-[#C8A96A]" />
               <span className="text-[10px] font-bold uppercase tracking-widest text-[#C8A96A]">Destaques da 1ª Edição</span>
