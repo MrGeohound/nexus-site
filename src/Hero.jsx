@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { ArrowRight, Star, CheckCircle, Users, Play, Quote } from 'lucide-react';
+import { ArrowRight, Star, CheckCircle, Users, Play } from 'lucide-react';
 import { track, EVENTS } from './lib/analytics.js';
 import { navigate } from './lib/router.jsx';
 
@@ -58,19 +58,19 @@ export default function Hero() {
         <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#12333A]/90 via-[#12333A]/30 to-transparent pointer-events-none"></div>
         <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#12333A]/80 via-transparent to-[#12333A]/50 pointer-events-none"></div>
 
-        {/* Floating Movie Trailer Quote Badge (Desktop - Top Right over Video) */}
-        <div className="absolute right-12 xl:right-16 top-28 z-20 max-w-sm pointer-events-none">
+        {/* Floating Movie Trailer Quote (Desktop - Clean Text Only, No Box) */}
+        <div className="absolute right-12 xl:right-16 top-28 z-20 max-w-md pointer-events-none">
           <div className={`transition-all duration-700 transform ${fadeState ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-3 scale-95'}`}>
-            <div className="bg-[#12333A]/80 backdrop-blur-md border border-[#C8A96A]/40 rounded-2xl p-5 shadow-[0_15px_35px_rgba(0,0,0,0.7)] text-right">
-              <div className="flex items-center justify-end gap-1.5 mb-2 text-[#C8A96A] text-[11px] font-extrabold uppercase tracking-widest">
-                <Star size={12} className="fill-[#C8A96A]" />
+            <div className="text-right drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
+              <div className="flex items-center justify-end gap-1.5 mb-1.5 text-[#C8A96A] text-xs font-extrabold uppercase tracking-widest">
+                <Star size={13} className="fill-[#C8A96A]" />
                 <span>Avaliação dos Participantes · {currentQuote.rating}/10</span>
               </div>
-              <p className="text-lg xl:text-xl font-extrabold text-[#F8F3EA] italic leading-snug mb-2 drop-shadow-md">
+              <p className="text-xl xl:text-2xl font-extrabold text-[#F8F3EA] italic leading-snug mb-2">
                 "{currentQuote.text}"
               </p>
-              <p className="text-xs text-[#C8A96A] font-bold">
-                — {currentQuote.author} <span className="text-[#F8F3EA]/60 font-normal">· {currentQuote.company}</span>
+              <p className="text-xs xl:text-sm text-[#C8A96A] font-bold">
+                — {currentQuote.author} <span className="text-[#F8F3EA]/80 font-normal">· {currentQuote.company}</span>
               </p>
             </div>
           </div>
@@ -159,7 +159,7 @@ export default function Hero() {
             autoPlay 
           />
           
-          {/* Intercalated Movie-Trailer Quote Overlay at the bottom of the video */}
+          {/* Overlay Gradient at the bottom of the video */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#12333A] via-[#12333A]/40 to-transparent flex flex-col justify-end p-4">
             
             {/* Header Badge */}
