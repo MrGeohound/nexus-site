@@ -15,12 +15,12 @@ export default function Hero() {
       {/* ========================================================================= */}
       <div className="hidden lg:flex relative min-h-screen w-full flex-col justify-center overflow-hidden">
         
-        {/* Background Compilation Video (Desktop) */}
+        {/* Background Compilation Video (Desktop) - Anchored at the TOP to keep heads 100% visible */}
         <div className="absolute inset-0 z-0">
           <video 
             ref={videoRef} 
             src="/assets/nexus-highlights-2026.mp4"
-            className="w-full h-full object-cover filter brightness-110 contrast-115 object-[center_35%]" 
+            className="w-full h-full object-cover object-top filter brightness-110 contrast-115" 
             muted 
             loop 
             playsInline 
@@ -34,7 +34,7 @@ export default function Hero() {
 
         {/* Main Content Container (Desktop - Above the Fold guaranteed) */}
         <main className="relative z-10 w-full px-8 xl:px-[8%] pt-20 pb-8 flex items-center min-h-screen">
-          <div className="w-full max-w-[500px] mr-auto">
+          <div className="w-full max-w-[480px] mr-auto">
             
             {/* Compact Glass Card */}
             <div className="bg-[#12333A]/75 backdrop-blur-xl border border-[#F8F3EA]/20 rounded-3xl p-6 xl:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
@@ -108,7 +108,7 @@ export default function Hero() {
           <video 
             ref={mobileVideoRef} 
             src="/assets/nexus-highlights-2026.mp4"
-            className="w-full h-full object-cover filter brightness-110 contrast-115 object-[center_35%]" 
+            className="w-full h-full object-cover object-top filter brightness-110 contrast-115" 
             muted 
             loop 
             playsInline 
