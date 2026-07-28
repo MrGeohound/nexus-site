@@ -19,8 +19,24 @@ export async function loadManifest() {
   const res = await fetch(VIDEOS.manifest, { cache: 'no-cache' });
   if (!res.ok) throw new Error('manifest_http_' + res.status);
   const data = await res.json();
-  _cache = data;
-  return data;
+
+  // Vídeos recebem type 'video'.
+  const videos = (data.videos || []).map((v) => ({ ...v, type: v.type || 'video' }));
+
+  // Fotos (opcional): manifesto separado. Entram no início da galeria.
+  let fotos = [];
+  if (VIDEOS.photosManifest) {
+    try {
+      const pr = await fetch(VIDEOS.photosManifest, { cache: 'no-cache' });
+      if (pr.ok) {
+        const pd = await pr.json();
+        fotos = (pd.items || pd.videos || []).map((p) => ({ ...p, type: 'photo' }));
+      }
+    } catch { /* sem fotos, segue só com vídeos */ }
+  }
+
+  _cache = { ...data, videos: [...fotos, ...videos], count: fotos.length + videos.length };
+  return _cache;
 }
 
 // --- Montagem de URLs --------------------------------------------------------
@@ -34,6 +50,20 @@ function r2(base, folder, file) {
  */
 export function resolveUrls(video, source) {
   const src = source || 'drive';
+
+  // Fotos: sempre servidas do R2 (imagem web + miniatura).
+  if (video.type === 'photo') {
+    const base = VIDEOS.base;
+    const full = r2(base, VIDEOS.paths.photo, `${video.id}.jpg`);
+    return {
+      kind: 'image',
+      poster: r2(base, VIDEOS.paths.thumb, `${video.id}.jpg`),
+      stream: full,
+      preview: '',
+      download: full,
+      embed: '',
+    };
+  }
 
   if (src === 'r2') {
     const base = VIDEOS.base;

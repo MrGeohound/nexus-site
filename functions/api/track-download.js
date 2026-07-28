@@ -25,8 +25,8 @@ export async function onRequestPost(context) {
     id = String(body?.id || '').trim();
   } catch { /* corpo inválido */ }
 
-  // Aceita apenas o identificador numérico do clipe (ex.: "00605595").
-  if (!/^\d{4,}$/.test(id)) return noContent();
+  // Aceita o identificador do clipe (ex.: "00605595") ou de foto (ex.: "foto-01").
+  if (!/^[A-Za-z0-9_-]{3,40}$/.test(id)) return noContent();
 
   try {
     const raw = await env.NEXUS_KV.get(COUNTS_KEY);

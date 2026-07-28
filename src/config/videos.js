@@ -23,9 +23,14 @@ export const VIDEOS = {
   // Estrutura de pastas no R2 (usada quando source = 'r2').
   paths: {
     mp4: 'mp4',      // {base}/mp4/{id}.mp4     — vídeo web (H.264)
-    thumb: 'thumb',  // {base}/thumb/{id}.jpg   — poster
+    thumb: 'thumb',  // {base}/thumb/{id}.jpg   — poster (vídeos e fotos)
     preview: 'preview', // {base}/preview/{id}.mp4 — clipe curto mudo p/ hover (opcional)
+    photo: 'photo',  // {base}/photo/{id}.jpg   — foto em tamanho web
   },
+
+  // Manifesto extra só de fotos (mantido separado para não se perder quando o
+  // pipeline de vídeo regenera o videos-manifest.json).
+  photosManifest: '/photos-manifest.json',
 
   // Gate de contato antes de baixar (alimenta a base comercial pós-evento).
   gate: {

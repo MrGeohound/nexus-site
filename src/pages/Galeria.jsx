@@ -56,6 +56,12 @@ function Player({ item, source, onClose, onDownload }) {
                 playsInline
                 className="h-full w-full object-contain"
               />
+            ) : kind === 'image' ? (
+              <img
+                src={stream}
+                alt={`Foto do NEXUS ${item.id}`}
+                className="h-full w-full object-contain"
+              />
             ) : (
               <iframe
                 src={embed}
@@ -70,13 +76,13 @@ function Player({ item, source, onClose, onDownload }) {
 
         <div className="mt-4 flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
           <span className="text-sm text-[#F8F3EA]/50">
-            Clipe #{item.seq} · NEXUS 23/07
+            {item.type === 'photo' ? 'Foto' : `Clipe #${item.seq}`} · NEXUS 23/07
           </span>
           <button
             onClick={() => onDownload(item)}
             className="flex items-center justify-center gap-2 rounded-full bg-[#B86B4B] px-6 py-3 text-sm font-bold uppercase tracking-wide text-[#F8F3EA] transition-colors hover:bg-[#9F573E]"
           >
-            <Download size={18} /> Baixar este vídeo
+            <Download size={18} /> {item.type === 'photo' ? 'Baixar esta foto' : 'Baixar este vídeo'}
           </button>
         </div>
       </div>
@@ -175,7 +181,7 @@ function VideoCard({ item, source, onOpen, onDownload }) {
         </span>
       </button>
       <span className="pointer-events-none absolute left-2 top-2 rounded-md bg-black/55 px-2 py-0.5 text-[11px] font-bold text-[#F8F3EA]/90">
-        #{item.seq}
+        {item.type === 'photo' ? '📷 Foto' : `#${item.seq}`}
       </span>
       <button
         onClick={() => onDownload(item)}
@@ -242,7 +248,8 @@ export default function Galeria() {
         fetch('/api/track-download', { method: 'POST', body: payload, keepalive: true, headers: { 'Content-Type': 'application/json' } });
       }
     } catch { /* ignora */ }
-    triggerDownload(download, `NEXUS_${item.id}.mp4`);
+    const ext = item.type === 'photo' ? 'jpg' : 'mp4';
+    triggerDownload(download, `NEXUS_${item.id}.${ext}`);
   };
 
   const requestDownload = (item) => {
