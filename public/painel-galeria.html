@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Painel · Galeria NEXUS</title>
+<style>
+  :root{
+    --bg:#12333A; --bg2:#0e2a30; --cream:#F8F3EA; --gold:#C8A96A; --terra:#B86B4B; --wa:#25D366;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg2);color:var(--cream);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:var(--gold)}
+  .wrap{max-width:960px;margin:0 auto;padding:24px 18px 60px}
+  .eyebrow{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:700;margin:0 0 4px}
+  h1{margin:0 0 6px;font-size:26px}
+  .sub{color:rgba(248,243,234,.6);margin:0 0 20px;font-size:14px}
+  .card{background:var(--bg);border:1px solid rgba(248,243,234,.1);border-radius:16px;padding:20px}
+  input{width:100%;border:1px solid rgba(248,243,234,.18);background:var(--bg2);color:var(--cream);border-radius:12px;padding:12px 14px;font-size:15px;outline:none}
+  input:focus{border-color:var(--gold)}
+  .btn{display:inline-flex;align-items:center;gap:8px;justify-content:center;border:none;cursor:pointer;background:var(--terra);color:var(--cream);font-weight:700;border-radius:999px;padding:12px 22px;font-size:14px;text-transform:uppercase;letter-spacing:.5px}
+  .btn:hover{background:#9F573E}
+  .btn.ghost{background:transparent;border:1px solid rgba(248,243,234,.25);text-transform:none;letter-spacing:0;font-weight:600}
+  .btn.ghost:hover{border-color:var(--gold);background:transparent}
+  .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .stat{display:flex;align-items:baseline;gap:10px;margin:0 0 16px}
+  .stat b{font-size:34px;color:var(--gold)}
+  .stat span{color:rgba(248,243,234,.6);font-size:14px}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{text-align:left;padding:11px 10px;border-bottom:1px solid rgba(248,243,234,.08);vertical-align:top}
+  th{color:rgba(248,243,234,.55);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+  tr:hover td{background:rgba(248,243,234,.03)}
+  .pill{display:inline-block;background:var(--wa);color:#0b3d24;font-weight:700;border-radius:999px;padding:4px 12px;text-decoration:none;font-size:13px;white-space:nowrap}
+  .muted{color:rgba(248,243,234,.45)}
+  .err{color:#E5896B;font-size:14px;margin-top:10px}
+  .hide{display:none}
+  .tools{gap:10px;margin:0 0 14px;justify-content:space-between}
+  @media(max-width:640px){ th.h-data,td.c-data{display:none} h1{font-size:22px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">NEXUS — Conexão de Verdade</p>
+  <h1>Painel da Galeria de vídeos</h1>
+  <p class="sub">Contatos de quem desbloqueou os downloads (gate da galeria).</p>
+
+  <!-- LOGIN -->
+  <div id="login" class="card" style="max-width:420px">
+    <label for="tok" style="display:block;margin-bottom:8px;font-weight:600">Senha de acesso</label>
+    <input id="tok" type="password" placeholder="Cole aqui o token de administrador" autocomplete="off" />
+    <div class="row" style="margin-top:14px">
+      <button class="btn" id="entrar">Entrar</button>
+      <label class="muted" style="font-size:13px"><input type="checkbox" id="lembrar" checked style="width:auto;margin-right:6px" />Lembrar neste dispositivo</label>
+    </div>
+    <div id="loginErr" class="err hide"></div>
+  </div>
+
+  <!-- PAINEL -->
+  <div id="painel" class="hide">
+    <div class="stat"><b id="total">0</b><span id="totalLbl">contatos</span></div>
+    <div class="row tools">
+      <input id="busca" placeholder="Buscar por nome, WhatsApp ou e-mail" style="max-width:340px" />
+      <div class="row">
+        <button class="btn ghost" id="atualizar">↻ Atualizar</button>
+        <button class="btn ghost" id="csv">Baixar CSV</button>
+        <button class="btn ghost" id="sair">Sair</button>
+      </div>
+    </div>
+    <div class="card" style="padding:6px 12px">
+      <table>
+        <thead><tr>
+          <th>Nome</th><th>WhatsApp</th><th>E-mail</th><th class="h-data">Quando</th>
+        </tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+      <p id="vazio" class="muted hide" style="padding:20px;text-align:center">Nenhum contato encontrado.</p>
+    </div>
+    <p class="sub" style="margin-top:14px" id="atualizadoEm"></p>
+  </div>
+</div>
+
+<script>
+  var API = '/api/galeria-leads';
+  var KEY = 'nexus_admin_token';
+  var dados = [];
+
+  function el(id){ return document.getElementById(id); }
+  function digits(s){ return (s||'').replace(/\D/g,''); }
+  function waLink(w){ var d = digits(w); if(!d) return ''; if(d.length<=11) d='55'+d; return 'https://wa.me/'+d; }
+  function fmtData(iso){ try{ return new Date(iso).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}); }catch(e){ return ''; } }
+
+  function getToken(){ return sessionStorage.getItem(KEY) || localStorage.getItem(KEY) || ''; }
+
+  function mostrarPainel(){ el('login').classList.add('hide'); el('painel').classList.remove('hide'); }
+  function mostrarLogin(){ el('painel').classList.add('hide'); el('login').classList.remove('hide'); }
+
+  async function carregar(){
+    var token = getToken();
+    if(!token){ mostrarLogin(); return; }
+    try{
+      var res = await fetch(API + '?token=' + encodeURIComponent(token) + '&_=' + Date.now());
+      if(res.status === 401){ erroLogin('Senha incorreta.'); sair(true); return; }
+      if(res.status === 503){ erroLogin('O painel ainda não foi ativado (falta definir ADMIN_EXPORT_TOKEN no servidor).'); return; }
+      if(!res.ok){ erroLogin('Erro ao carregar (' + res.status + ').'); return; }
+      var j = await res.json();
+      dados = j.contatos || [];
+      mostrarPainel();
+      render();
+      el('atualizadoEm').textContent = 'Atualizado em ' + new Date().toLocaleString('pt-BR');
+    }catch(e){ erroLogin('Falha de conexão. Tente novamente.'); }
+  }
+
+  function render(){
+    var q = digits(el('busca').value) || (el('busca').value||'').trim().toLowerCase();
+    var termo = (el('busca').value||'').trim().toLowerCase();
+    var lista = dados.filter(function(c){
+      if(!termo) return true;
+      return (c.nome||'').toLowerCase().includes(termo)
+        || (c.email||'').toLowerCase().includes(termo)
+        || digits(c.whatsapp).includes(digits(termo));
+    });
+    el('total').textContent = lista.length;
+    el('totalLbl').textContent = lista.length === 1 ? 'contato' : 'contatos';
+    var tb = el('tbody'); tb.innerHTML = '';
+    el('vazio').classList.toggle('hide', lista.length !== 0);
+    lista.forEach(function(c){
+      var tr = document.createElement('tr');
+      var wa = waLink(c.whatsapp);
+      tr.innerHTML =
+        '<td>'+ (c.nome ? escapeHtml(c.nome) : '<span class=muted>—</span>') +'</td>'+
+        '<td>'+ (wa ? '<a class="pill" target="_blank" rel="noopener" href="'+wa+'">'+escapeHtml(c.whatsapp)+'</a>' : '<span class=muted>—</span>') +'</td>'+
+        '<td>'+ (c.email ? '<a href="mailto:'+escapeHtml(c.email)+'">'+escapeHtml(c.email)+'</a>' : '<span class=muted>—</span>') +'</td>'+
+        '<td class="c-data muted">'+ fmtData(c.data) +'</td>';
+      tb.appendChild(tr);
+    });
+  }
+
+  function escapeHtml(s){ return String(s).replace(/[&<>"']/g, function(m){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]); }); }
+
+  function erroLogin(msg){ var e = el('loginErr'); e.textContent = msg; e.classList.remove('hide'); }
+
+  function entrar(){
+    var t = el('tok').value.trim();
+    if(!t){ erroLogin('Digite a senha.'); return; }
+    if(el('lembrar').checked) localStorage.setItem(KEY, t); else sessionStorage.setItem(KEY, t);
+    el('loginErr').classList.add('hide');
+    carregar();
+  }
+  function sair(silent){ localStorage.removeItem(KEY); sessionStorage.removeItem(KEY); el('tok').value=''; mostrarLogin(); if(!silent) window.scrollTo(0,0); }
+
+  el('entrar').addEventListener('click', entrar);
+  el('tok').addEventListener('keydown', function(e){ if(e.key==='Enter') entrar(); });
+  el('busca').addEventListener('input', render);
+  el('atualizar').addEventListener('click', carregar);
+  el('sair').addEventListener('click', function(){ sair(false); });
+  el('csv').addEventListener('click', function(){
+    window.open(API + '?format=csv&token=' + encodeURIComponent(getToken()), '_blank');
+  });
+
+  // Token via #token=... (link direto), senão tenta o guardado.
+  (function(){
+    var h = (location.hash||'').match(/token=([^&]+)/);
+    if(h){ localStorage.setItem(KEY, decodeURIComponent(h[1])); history.replaceState(null,'',location.pathname); }
+    carregar();
+  })();
+</script>
+</body>
+</html>
