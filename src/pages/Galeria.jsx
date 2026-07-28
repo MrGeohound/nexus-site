@@ -233,6 +233,15 @@ export default function Galeria() {
   const doDownload = (item) => {
     const { download } = resolveUrls(item, source);
     track('galeria_download', { id: item.id });
+    // Conta o download no servidor (não bloqueia o download em si).
+    try {
+      const payload = JSON.stringify({ id: item.id });
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon('/api/track-download', new Blob([payload], { type: 'application/json' }));
+      } else {
+        fetch('/api/track-download', { method: 'POST', body: payload, keepalive: true, headers: { 'Content-Type': 'application/json' } });
+      }
+    } catch { /* ignora */ }
     triggerDownload(download, `NEXUS_${item.id}.mp4`);
   };
 
