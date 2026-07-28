@@ -25,3 +25,6 @@ dist-ssr
 .env
 .dev.vars
 .wrangler/
+
+# Arquivos de trabalho do pipeline de vídeos (não versionar — pode ter GBs)
+work/

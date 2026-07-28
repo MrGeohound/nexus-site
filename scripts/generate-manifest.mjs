@@ -53,7 +53,10 @@ function normalizeEntry(raw) {
 }
 
 function loadListing(file) {
-  const parsed = JSON.parse(readFileSync(file, 'utf8'));
+  // Remove BOM (ex.: PowerShell Out-File -Encoding utf8) antes do parse.
+  let text = readFileSync(file, 'utf8');
+  if (text.charCodeAt(0) === 0xfeff) text = text.slice(1);
+  const parsed = JSON.parse(text);
   const list = Array.isArray(parsed) ? parsed : parsed.files || parsed.items || [];
   return list.map(normalizeEntry);
 }
