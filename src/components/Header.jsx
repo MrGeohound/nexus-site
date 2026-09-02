@@ -20,9 +20,9 @@ export default function Header({ isRebranded = true }) {
       <div className="flex items-center z-[60]">
         <a href="/" onClick={(e) => { e.preventDefault(); navigate('/'); }} className="flex items-center justify-start hover:opacity-90 transition-opacity">
           <img
-            src={isRebranded ? "/assets/rebrand/logo-nexus-principal.png" : "/assets/logo-nexus-3.png"}
+            src="/assets/rebrand/logo-nexus-principal.png"
             alt="NEXUS"
-            className={isRebranded ? "h-[36px] md:h-[46px] w-auto object-contain" : "h-[90px] md:h-[110px] object-contain"}
+            className="h-[40px] md:h-[50px] w-auto object-contain"
           />
         </a>
       </div>
