@@ -16,7 +16,7 @@ export default function Footer({ isRebranded = true }) {
           <img
             src={isRebranded ? "/assets/rebrand/logo-nexus-principal.png" : "/assets/logo-nexus-2.png"}
             alt="NEXUS"
-            className="w-[200px] md:w-[280px] h-auto object-contain opacity-95 hover:opacity-100 transition-opacity"
+            className="h-[40px] md:h-[50px] w-auto object-contain opacity-95 hover:opacity-100 transition-opacity"
           />
         </Link>
 

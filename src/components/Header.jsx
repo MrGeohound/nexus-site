@@ -12,7 +12,7 @@ export default function Header({ isRebranded = true }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className={`fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 py-3.5 lg:px-12 backdrop-blur-md border-b transition-colors duration-700 ${
+    <header className={`fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 py-4 lg:px-12 backdrop-blur-md border-b transition-colors duration-700 ${
       isRebranded 
         ? 'bg-[#0B0B0D]/95 border-[#C5C7CB]/15 text-[#F5F5F7]' 
         : 'bg-[#12333A]/95 border-[#F8F3EA]/10 text-[#F8F3EA]'
@@ -22,7 +22,7 @@ export default function Header({ isRebranded = true }) {
           <img
             src={isRebranded ? "/assets/rebrand/logo-nexus-principal.png" : "/assets/logo-nexus-3.png"}
             alt="NEXUS"
-            className={isRebranded ? "w-[170px] md:w-[240px] h-auto object-contain" : "h-[90px] md:h-[110px] object-contain"}
+            className={isRebranded ? "h-[36px] md:h-[46px] w-auto object-contain" : "h-[90px] md:h-[110px] object-contain"}
           />
         </a>
       </div>
