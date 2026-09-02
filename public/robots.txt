@@ -1,0 +1,28 @@
+# Robots.txt for NEXUS — Conexão de Verdade
+User-agent: *
+Allow: /
+
+# AI Crawlers & LLM Search Engines (Generative Engine Optimization - GEO)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Sitemap Location
+Sitemap: https://www.siganexus.com.br/sitemap.xml

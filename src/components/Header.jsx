@@ -21,7 +21,7 @@ export default function Header({ isRebranded = true }) {
         <a href="/" onClick={(e) => { e.preventDefault(); navigate('/'); }} className="flex items-center justify-start hover:opacity-90 transition-opacity">
           <img
             src="/assets/rebrand/logo-nexus-principal.png"
-            alt="NEXUS"
+            alt="NEXUS — Conexão de Verdade"
             className="h-[40px] md:h-[50px] w-auto object-contain"
           />
         </a>
@@ -29,7 +29,7 @@ export default function Header({ isRebranded = true }) {
 
       {/* Desktop Menu */}
       <nav className={`hidden lg:flex items-center gap-8 text-[15px] font-inter ${isRebranded ? 'text-[#C5C7CB]' : 'text-[#F8F3EA]/80'}`}>
-        <a href="#about" onClick={(e) => { e.preventDefault(); navigate('/#about'); }} className="hover:text-white transition-colors">Quem somos</a>
+        <a href="/hub" onClick={(e) => { e.preventDefault(); navigate('/hub'); }} className="hover:text-white transition-colors">Quem somos</a>
         <a href="/manifesto" onClick={(e) => { e.preventDefault(); navigate('/manifesto'); }} className="hover:text-white transition-colors font-bold flex items-center gap-1.5 text-[#F5F5F7]">
           <span className="w-1.5 h-1.5 rounded-full bg-[#E1121F]" title="Pulso NEXUS"></span> Manifesto
         </a>
@@ -81,10 +81,10 @@ export default function Header({ isRebranded = true }) {
         isRebranded ? 'bg-[#0B0B0D] text-[#F5F5F7]' : 'bg-[#12333A] text-[#F8F3EA]'
       } ${mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
         <a href="/" onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); navigate('/'); }} className="hover:text-[#C5C7CB] transition-colors">Início</a>
+        <a href="/hub" onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); navigate('/hub'); }} className="hover:text-[#C5C7CB] transition-colors">Quem somos</a>
         <a href="/manifesto" onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); navigate('/manifesto'); }} className="text-[#F5F5F7] font-extrabold flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-[#E1121F]"></span> Manifesto do Ecossistema
         </a>
-        <a href="#about" onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); navigate('/#about'); }} className="hover:text-[#C5C7CB] transition-colors">Quem somos</a>
         <a href="#depoimentos" onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); navigate('/#depoimentos'); }} className="hover:text-[#C5C7CB] transition-colors">Depoimentos</a>
         <a href="#lista-de-espera" onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); navigate('/#lista-de-espera'); }} className="hover:text-[#C5C7CB] transition-colors">2ª Edição VIP</a>
         <a href="/galeria" onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); navigate('/galeria'); }} className="hover:text-[#C5C5C7] transition-colors">Galeria</a>
