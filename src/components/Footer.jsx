@@ -14,7 +14,7 @@ export default function Footer({ isRebranded = true }) {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
         <Link to="/">
           <img
-            src={isRebranded ? "/assets/rebrand/logo-nexus-2026-nobg.png" : "/assets/logo-nexus-2.png"}
+            src={isRebranded ? "/assets/rebrand/logo-nexus-principal.png" : "/assets/logo-nexus-2.png"}
             alt="NEXUS"
             className="h-10 md:h-12 object-contain opacity-90 hover:opacity-100 transition-opacity"
           />

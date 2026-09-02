@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Menu, X, Star, Sparkles } from 'lucide-react';
 import { track, EVENTS } from '../lib/analytics.js';
 import { navigate } from '../lib/router.jsx';
@@ -20,7 +20,7 @@ export default function Header({ isRebranded = true }) {
       <div className="flex items-center z-[60]">
         <a href="/" onClick={(e) => { e.preventDefault(); navigate('/'); }} className="relative flex items-center justify-center w-28 h-10 md:w-36 md:h-12 hover:opacity-90 transition-opacity">
           <img
-            src={isRebranded ? "/assets/rebrand/logo-nexus-2026-nobg.png" : "/assets/logo-nexus-3.png"}
+            src={isRebranded ? "/assets/rebrand/logo-nexus-principal.png" : "/assets/logo-nexus-3.png"}
             alt="NEXUS"
             className={isRebranded ? "h-[45px] md:h-[55px] object-contain" : "absolute top-[70%] left-1/2 -translate-x-1/2 -translate-y-1/2 h-[110px] md:h-[140px] max-w-none object-contain pointer-events-none"}
           />

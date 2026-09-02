@@ -33,7 +33,7 @@ export default function Manifesto() {
         </div>
 
         <img 
-          src="/assets/rebrand/logo-nexus-2026-nobg.png" 
+          src="/assets/rebrand/logo-nexus-principal.png" 
           alt="NEXUS 2026" 
           className="w-full max-w-[480px] md:max-w-[600px] h-auto mx-auto mb-6 filter drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)]"
         />
