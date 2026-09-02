@@ -69,9 +69,9 @@ export default function Hero({ isRebranded = true }) {
           <div className={`transition-all duration-700 transform ${fadeState ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-3 scale-95'}`}>
             <div className="text-right drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
               <div className={`flex items-center justify-end gap-1.5 mb-1.5 text-xs font-extrabold uppercase tracking-widest ${
-                isRebranded ? 'text-[#E1121F]' : 'text-[#C8A96A]'
+                isRebranded ? 'text-[#C5C7CB]' : 'text-[#C8A96A]'
               }`}>
-                <Star size={13} className={isRebranded ? 'fill-[#E1121F]' : 'fill-[#C8A96A]'} />
+                <Star size={13} className={isRebranded ? 'fill-[#C5C7CB] text-[#C5C7CB]' : 'fill-[#C8A96A]'} />
                 <span>Avaliação dos Participantes · {currentQuote.rating}/10</span>
               </div>
               <p className={`text-xl xl:text-2xl font-extrabold italic leading-snug mb-2 ${
@@ -90,40 +90,41 @@ export default function Hero({ isRebranded = true }) {
 
         {/* Main Content Container (Desktop - Above the Fold guaranteed) */}
         <main className="relative z-10 w-full px-8 xl:px-[8%] pt-20 pb-8 flex items-center min-h-screen">
-          <div className="w-full max-w-[520px] mr-auto">
+          <div className="w-full max-w-[500px] mr-auto">
             
             {/* Compact Glass Card */}
             <div className={`backdrop-blur-xl border rounded-3xl p-6 xl:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-colors duration-700 ${
               isRebranded 
-                ? 'bg-[#0B0B0D]/85 border-[#C5C7CB]/20 text-[#F5F5F7]' 
+                ? 'bg-[#0B0B0D]/90 border-[#C5C7CB]/25 text-[#F5F5F7]' 
                 : 'bg-[#12333A]/75 border-[#F8F3EA]/20 text-[#F8F3EA]'
             }`}>
               
+              {/* Tightly Cropped Logo */}
               <img 
                 src={isRebranded ? "/assets/rebrand/logo-nexus-principal.png" : "/assets/logo-nexus-2.png"} 
                 alt="NEXUS Conexão de Verdade" 
-                className="w-[220px] xl:w-[260px] mb-4 object-contain" 
+                className="h-[60px] xl:h-[75px] w-auto mb-5 object-contain" 
               />
 
               <h1 className="text-[26px] xl:text-[34px] font-inter font-extrabold tracking-tight leading-[1.1] mb-3">
-                O NEXUS aconteceu. E <span className={isRebranded ? "text-transparent bg-clip-text bg-gradient-to-r from-[#E1121F] via-[#F5F5F7] to-[#C5C7CB]" : "text-transparent bg-clip-text bg-gradient-to-r from-[#C8A96A] via-[#E8D8BE] to-[#B86B4B]"}>redefiniu o networking.</span>
+                O NEXUS aconteceu. E <span className={isRebranded ? "text-transparent bg-clip-text bg-gradient-to-r from-[#F1F2F3] via-[#C5C7CB] via-65%-[#E3E4E6] to-[#979A9F]" : "text-transparent bg-clip-text bg-gradient-to-r from-[#C8A96A] via-[#E8D8BE] to-[#B86B4B]"}>redefiniu o networking.</span>
               </h1>
 
               <p className={`font-inter text-xs xl:text-sm leading-relaxed mb-3 ${isRebranded ? 'text-[#C5C7CB]' : 'text-[#F8F3EA]/90'}`}>
-                Com <strong className={isRebranded ? "text-[#E1121F] font-bold" : "text-[#C8A96A] font-bold"}>9,3 de satisfação média</strong> e <strong className={isRebranded ? "text-[#E1121F] font-bold" : "text-[#C8A96A] font-bold"}>92% dos participantes confirmados</strong> para a próxima edição, provamos que conexões reais não se prometem — se provocam.
+                Com <strong className={isRebranded ? "text-white font-bold" : "text-[#C8A96A] font-bold"}>9,3 de satisfação média</strong> e <strong className={isRebranded ? "text-white font-bold" : "text-[#C8A96A] font-bold"}>92% dos participantes confirmados</strong> para a próxima edição, provamos que conexões reais não se prometem — se provocam.
               </p>
 
               <p className={`font-inter text-[11px] xl:text-xs leading-relaxed mb-5 ${isRebranded ? 'text-[#9A9AA0]' : 'text-[#F8F3EA]/70'}`}>
                 Inscreva-se na <strong>Lista de Espera VIP da 2ª Edição</strong> para receber o aviso e o Lote 1 exclusivo.
               </p>
 
-              {/* CTA Buttons */}
+              {/* CTA Buttons (Platinum Metal Steel Styling) */}
               <div className="flex items-center gap-3 mb-5">
                 <button
                   onClick={() => { track(EVENTS.CLICK_PRIMARY_CTA, { origem: 'hero_pos_evento' }); navigate('#lista-de-espera'); }}
-                  className={`flex-1 flex justify-center items-center gap-2 px-4 py-3.5 rounded-full font-bold text-xs uppercase tracking-wide transition-all hover:scale-105 group ${
+                  className={`flex-1 flex justify-center items-center gap-2 px-4 py-3.5 rounded-full font-black text-xs uppercase tracking-wide transition-all hover:scale-105 group ${
                     isRebranded 
-                      ? 'bg-[#E1121F] text-white hover:bg-[#A00D18] shadow-[0_0_25px_rgba(225,18,31,0.4)]' 
+                      ? 'bg-gradient-to-r from-[#F1F2F3] via-[#C5C7CB] to-[#979A9F] text-[#050505] hover:from-white hover:to-[#C5C7CB] shadow-[0_0_25px_rgba(197,199,203,0.3)]' 
                       : 'bg-[#B86B4B] text-[#F8F3EA] hover:bg-[#9F573E] shadow-[0_0_20px_rgba(184,107,75,0.4)]'
                   }`}
                 >
@@ -136,24 +137,24 @@ export default function Hero({ isRebranded = true }) {
                   onClick={() => track(EVENTS.CLICK_SECONDARY_CTA, { origem: 'hero_depoimentos' })}
                   className={`flex justify-center items-center gap-1.5 border px-4 py-3.5 rounded-full font-bold text-xs uppercase tracking-wide transition-colors group shrink-0 ${
                     isRebranded 
-                      ? 'border-[#C5C7CB]/40 text-[#F5F5F7] hover:border-[#E1121F] hover:text-[#E1121F]' 
+                      ? 'border-[#C5C7CB]/40 text-[#F5F5F7] hover:border-white hover:text-white' 
                       : 'border-[#C8A96A] text-[#F8F3EA] hover:bg-[#C8A96A] hover:text-[#12333A]'
                   }`}
                 >
-                  <Star size={14} className={isRebranded ? "text-[#E1121F]" : "text-[#C8A96A] group-hover:text-[#12333A]"} />
+                  <Star size={14} className={isRebranded ? "text-[#C5C7CB]" : "text-[#C8A96A] group-hover:text-[#12333A]"} />
                   Depoimentos
                 </a>
               </div>
 
-              {/* Verified Metrics Bar */}
-              <div className={`grid grid-cols-3 gap-2 border-t pt-4 text-center ${isRebranded ? 'border-[#C5C7CB]/15' : 'border-[#F8F3EA]/15'}`}>
+              {/* Verified Metrics Bar (Platinum Steel) */}
+              <div className={`grid grid-cols-3 gap-2 border-t pt-4 text-center ${isRebranded ? 'border-[#C5C7CB]/20' : 'border-[#F8F3EA]/15'}`}>
                 <div>
-                  <p className={`text-base xl:text-lg font-black ${isRebranded ? 'text-[#E1121F]' : 'text-[#C8A96A]'}`}>9,3 / 10</p>
+                  <p className={`text-base xl:text-lg font-black ${isRebranded ? 'text-transparent bg-clip-text bg-gradient-to-r from-[#F1F2F3] to-[#C5C7CB]' : 'text-[#C8A96A]'}`}>9,3 / 10</p>
                   <p className={`text-[9px] xl:text-[10px] uppercase tracking-wider font-semibold ${isRebranded ? 'text-[#9A9AA0]' : 'text-[#F8F3EA]/60'}`}>Satisfação</p>
                 </div>
 
                 <div>
-                  <p className={`text-base xl:text-lg font-black ${isRebranded ? 'text-[#E1121F]' : 'text-[#C8A96A]'}`}>92%</p>
+                  <p className={`text-base xl:text-lg font-black ${isRebranded ? 'text-transparent bg-clip-text bg-gradient-to-r from-[#F1F2F3] to-[#C5C7CB]' : 'text-[#C8A96A]'}`}>92%</p>
                   <p className={`text-[9px] xl:text-[10px] uppercase tracking-wider font-semibold ${isRebranded ? 'text-[#9A9AA0]' : 'text-[#F8F3EA]/60'}`}>Retorno</p>
                 </div>
 
@@ -191,8 +192,8 @@ export default function Hero({ isRebranded = true }) {
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent flex flex-col justify-end p-4">
             
             {/* Header Badge */}
-            <div className="flex items-center gap-1.5 mb-1 text-[#E1121F]">
-              <Play size={10} className="fill-[#E1121F]" />
+            <div className="flex items-center gap-1.5 mb-1 text-[#C5C7CB]">
+              <Play size={10} className="fill-[#C5C7CB]" />
               <span className="text-[10px] font-bold uppercase tracking-widest">Destaques 1ª Edição</span>
             </div>
 
@@ -217,15 +218,15 @@ export default function Hero({ isRebranded = true }) {
           <img 
             src={isRebranded ? "/assets/rebrand/logo-nexus-principal.png" : "/assets/logo-nexus-2.png"} 
             alt="NEXUS Conexão de Verdade" 
-            className="w-[200px] mb-4 object-contain" 
+            className="h-[55px] w-auto mb-4 object-contain" 
           />
 
           <h1 className="text-2xl font-extrabold tracking-tight leading-tight mb-3">
-            O NEXUS aconteceu. E <span className={isRebranded ? "text-transparent bg-clip-text bg-gradient-to-r from-[#E1121F] via-[#F5F5F7] to-[#C5C7CB]" : "text-transparent bg-clip-text bg-gradient-to-r from-[#C8A96A] via-[#E8D8BE] to-[#B86B4B]"}>redefiniu o networking.</span>
+            O NEXUS aconteceu. E <span className={isRebranded ? "text-transparent bg-clip-text bg-gradient-to-r from-[#F1F2F3] via-[#C5C7CB] to-[#979A9F]" : "text-transparent bg-clip-text bg-gradient-to-r from-[#C8A96A] via-[#E8D8BE] to-[#B86B4B]"}>redefiniu o networking.</span>
           </h1>
 
           <p className={`text-sm leading-relaxed mb-3 ${isRebranded ? 'text-[#C5C7CB]' : 'text-[#F8F3EA]/90'}`}>
-            Com <strong className={isRebranded ? "text-[#E1121F]" : "text-[#C8A96A]"}>9,3 de satisfação média</strong> e <strong className={isRebranded ? "text-[#E1121F]" : "text-[#C8A96A]"}>92% dos participantes confirmados</strong> para a próxima edição, provamos que conexões reais não se prometem — se provocam.
+            Com <strong className={isRebranded ? "text-white" : "text-[#C8A96A]"}>9,3 de satisfação média</strong> e <strong className={isRebranded ? "text-white" : "text-[#C8A96A]"}>92% dos participantes confirmados</strong> para a próxima edição, provamos que conexões reais não se prometem — se provocam.
           </p>
 
           <p className={`text-xs leading-relaxed mb-6 ${isRebranded ? 'text-[#9A9AA0]' : 'text-[#F8F3EA]/70'}`}>
@@ -236,8 +237,8 @@ export default function Hero({ isRebranded = true }) {
           <div className="flex flex-col gap-3 mb-6">
             <button
               onClick={() => { track(EVENTS.CLICK_PRIMARY_CTA, { origem: 'hero_pos_evento_mobile' }); navigate('#lista-de-espera'); }}
-              className={`w-full flex justify-center items-center gap-2 py-3.5 px-6 rounded-full font-bold text-xs uppercase tracking-wide shadow-lg ${
-                isRebranded ? 'bg-[#E1121F] text-white hover:bg-[#A00D18]' : 'bg-[#B86B4B] text-[#F8F3EA] hover:bg-[#9F573E]'
+              className={`w-full flex justify-center items-center gap-2 py-3.5 px-6 rounded-full font-black text-xs uppercase tracking-wide shadow-lg ${
+                isRebranded ? 'bg-gradient-to-r from-[#F1F2F3] via-[#C5C7CB] to-[#979A9F] text-[#050505]' : 'bg-[#B86B4B] text-[#F8F3EA]'
               }`}
             >
               Entrar na Lista VIP (2ª Edição)
@@ -251,7 +252,7 @@ export default function Hero({ isRebranded = true }) {
                 isRebranded ? 'border-[#C5C7CB]/30 text-[#F5F5F7]' : 'border-[#C8A96A] text-[#F8F3EA]'
               }`}
             >
-              <Star size={14} className={isRebranded ? "text-[#E1121F]" : "text-[#C8A96A]"} />
+              <Star size={14} className={isRebranded ? "text-[#C5C7CB]" : "text-[#C8A96A]"} />
               Ver Depoimentos
             </a>
           </div>
@@ -259,11 +260,11 @@ export default function Hero({ isRebranded = true }) {
           {/* Mobile Metrics */}
           <div className={`grid grid-cols-3 gap-2 border-t pt-4 text-center ${isRebranded ? 'border-[#C5C7CB]/15' : 'border-[#F8F3EA]/15'}`}>
             <div>
-              <p className={`text-base font-black ${isRebranded ? 'text-[#E1121F]' : 'text-[#C8A96A]'}`}>9,3 / 10</p>
+              <p className={`text-base font-black ${isRebranded ? 'text-[#F5F5F7]' : 'text-[#C8A96A]'}`}>9,3 / 10</p>
               <p className={`text-[9px] uppercase font-semibold ${isRebranded ? 'text-[#9A9AA0]' : 'text-[#F8F3EA]/60'}`}>Satisfação</p>
             </div>
             <div>
-              <p className={`text-base font-black ${isRebranded ? 'text-[#E1121F]' : 'text-[#C8A96A]'}`}>92%</p>
+              <p className={`text-base font-black ${isRebranded ? 'text-[#F5F5F7]' : 'text-[#C8A96A]'}`}>92%</p>
               <p className={`text-[9px] uppercase font-semibold ${isRebranded ? 'text-[#9A9AA0]' : 'text-[#F8F3EA]/60'}`}>Retorno</p>
             </div>
             <div>
@@ -288,13 +289,13 @@ export default function Hero({ isRebranded = true }) {
             {[1, 2, 3, 4].map((set) => (
               <div key={set} className="flex items-center justify-around w-screen max-w-[1000px] shrink-0">
                 <span className="uppercase tracking-[0.2em] font-jakarta text-xs font-bold cursor-default">Wine Vinhos</span>
-                <span className={`text-xs mx-4 ${isRebranded ? 'text-[#E1121F]' : 'text-[#C8A96A]'}`}>✦</span>
+                <span className={`text-xs mx-4 ${isRebranded ? 'text-[#C5C7CB]' : 'text-[#C8A96A]'}`}>✦</span>
                 <span className="uppercase tracking-[0.2em] font-jakarta text-xs font-bold cursor-default">Marvin Soluções</span>
-                <span className={`text-xs mx-4 ${isRebranded ? 'text-[#E1121F]' : 'text-[#C8A96A]'}`}>✦</span>
+                <span className={`text-xs mx-4 ${isRebranded ? 'text-[#C5C7CB]' : 'text-[#C8A96A]'}`}>✦</span>
                 <span className="uppercase tracking-[0.2em] font-jakarta text-xs font-bold cursor-default">Ninna Hub</span>
-                <span className={`text-xs mx-4 ${isRebranded ? 'text-[#E1121F]' : 'text-[#C8A96A]'}`}>✦</span>
+                <span className={`text-xs mx-4 ${isRebranded ? 'text-[#C5C7CB]' : 'text-[#C8A96A]'}`}>✦</span>
                 <span className="uppercase tracking-[0.2em] font-jakarta text-xs font-bold cursor-default">Daniele Almeida</span>
-                <span className={`text-xs mx-4 ${isRebranded ? 'text-[#E1121F]' : 'text-[#C8A96A]'}`}>✦</span>
+                <span className={`text-xs mx-4 ${isRebranded ? 'text-[#C5C7CB]' : 'text-[#C8A96A]'}`}>✦</span>
               </div>
             ))}
           </div>

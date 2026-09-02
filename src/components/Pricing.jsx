@@ -38,12 +38,12 @@ export default function Pricing() {
     <section id="lista-de-espera" className="relative z-10 border-t border-[#C5C7CB]/10 bg-[#050505] px-6 py-24 lg:px-[10%]">
       <div className="mx-auto max-w-5xl">
         <div id="pricing" className="mb-10 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#E1121F]/40 bg-[#E1121F]/10 text-[#E1121F] font-bold text-xs uppercase tracking-widest mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#C5C7CB]/40 bg-[#C5C7CB]/10 text-[#C5C7CB] font-bold text-xs uppercase tracking-widest mb-4">
             <Sparkles size={14} /> 1ª Edição Encerrada · 2ª Edição em Breve
           </div>
           <h2 className="mb-4 text-3xl font-extrabold tracking-tight text-[#F5F5F7] md:text-5xl">
             Lista de Espera VIP —{' '}
-            <span className="bg-gradient-to-r from-[#E1121F] via-[#F5F5F7] to-[#C5C7CB] bg-clip-text text-transparent">2ª Edição NEXUS</span>
+            <span className="bg-gradient-to-r from-[#F1F2F3] via-[#C5C7CB] to-[#979A9F] bg-clip-text text-transparent">2ª Edição NEXUS</span>
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-[#C5C7CB]">
             A 1ª edição esgotou rapidamente. Cadastre-se gratuitamente abaixo para receber o aviso de abertura antes do público geral e garantir desconto exclusivo de Lote 1.
@@ -52,33 +52,33 @@ export default function Pricing() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
-          {/* VIP Benefits Box */}
-          <div className="lg:col-span-5 rounded-3xl border border-[#E1121F]/40 bg-[#0B0B0D] p-8 text-[#F5F5F7] flex flex-col justify-between shadow-2xl relative overflow-hidden">
-            <div className="h-[2px] absolute top-0 left-0 right-0 bg-gradient-to-r from-[#E1121F] to-[#A00D18]"></div>
+          {/* VIP Benefits Box (Platinum Metal Border) */}
+          <div className="lg:col-span-5 rounded-3xl border border-[#C5C7CB]/30 bg-[#0B0B0D] p-8 text-[#F5F5F7] flex flex-col justify-between shadow-2xl relative overflow-hidden">
+            <div className="h-[2px] absolute top-0 left-0 right-0 bg-gradient-to-r from-[#F1F2F3] via-[#C5C7CB] to-[#979A9F]"></div>
             <div>
-              <div className="mb-6 inline-block rounded-full bg-[#E1121F]/20 border border-[#E1121F]/40 px-4 py-1 text-xs font-extrabold uppercase tracking-widest text-[#E1121F]">
+              <div className="mb-6 inline-block rounded-full bg-[#C5C7CB]/15 border border-[#C5C7CB]/40 px-4 py-1 text-xs font-extrabold uppercase tracking-widest text-[#C5C7CB]">
                 Vantagens da Lista VIP
               </div>
               <h3 className="mb-6 text-2xl font-bold">Por que se cadastrar agora?</h3>
               
               <ul className="space-y-4 text-sm text-[#C5C7CB]">
                 <li className="flex items-start gap-3">
-                  <Check size={20} className="mt-0.5 shrink-0 text-[#E1121F]" />
+                  <Check size={20} className="mt-0.5 shrink-0 text-[#C5C7CB]" />
                   <span><strong>Acesso Antecipado:</strong> Link de compra liberado 24h antes do lançamento oficial.</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Check size={20} className="mt-0.5 shrink-0 text-[#E1121F]" />
+                  <Check size={20} className="mt-0.5 shrink-0 text-[#C5C7CB]" />
                   <span><strong>Condição Exclusiva Lote 1:</strong> Garantia do menor valor de ingresso.</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Check size={20} className="mt-0.5 shrink-0 text-[#E1121F]" />
+                  <Check size={20} className="mt-0.5 shrink-0 text-[#C5C7CB]" />
                   <span><strong>Curadoria de Conexões:</strong> Atendimento direto com a equipe para alinhamento de perfil de networking.</span>
                 </li>
               </ul>
             </div>
 
             <div className="mt-8 pt-6 border-t border-[#C5C7CB]/10 flex items-center gap-2 text-xs text-[#9A9AA0]">
-              <ShieldCheck size={16} className="text-[#E1121F]" />
+              <ShieldCheck size={16} className="text-[#C5C7CB]" />
               <span>Seus dados estão 100% seguros. Não enviamos spam.</span>
             </div>
           </div>
@@ -87,7 +87,7 @@ export default function Pricing() {
           <div className="lg:col-span-7 rounded-3xl border border-[#C5C7CB]/20 bg-[#0B0B0D] p-8 md:p-10 flex flex-col justify-center shadow-xl">
             {status === 'done' ? (
               <div className="text-center py-8">
-                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#E1121F]/20 text-[#E1121F]">
+                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#C5C7CB]/20 text-[#F5F5F7]">
                   <Check size={32} />
                 </div>
                 <h3 className="mb-2 text-2xl font-extrabold text-[#F5F5F7]">Você está na Lista VIP!</h3>
@@ -106,7 +106,7 @@ export default function Pricing() {
                     value={form.nome}
                     onChange={onChange}
                     placeholder="Seu nome"
-                    className="w-full rounded-xl border border-[#C5C7CB]/20 bg-[#050505] px-4 py-3 text-[#F5F5F7] placeholder-[#9A9AA0] outline-none focus:border-[#E1121F]"
+                    className="w-full rounded-xl border border-[#C5C7CB]/20 bg-[#050505] px-4 py-3 text-[#F5F5F7] placeholder-[#9A9AA0] outline-none focus:border-[#C5C7CB]"
                   />
                 </div>
 
@@ -118,7 +118,7 @@ export default function Pricing() {
                     onChange={onChange}
                     placeholder="(85) 99999-9999"
                     inputMode="tel"
-                    className="w-full rounded-xl border border-[#C5C7CB]/20 bg-[#050505] px-4 py-3 text-[#F5F5F7] placeholder-[#9A9AA0] outline-none focus:border-[#E1121F]"
+                    className="w-full rounded-xl border border-[#C5C7CB]/20 bg-[#050505] px-4 py-3 text-[#F5F5F7] placeholder-[#9A9AA0] outline-none focus:border-[#C5C7CB]"
                   />
                 </div>
 
@@ -129,7 +129,7 @@ export default function Pricing() {
                     value={form.empresa}
                     onChange={onChange}
                     placeholder="Sua empresa ou área de atuação"
-                    className="w-full rounded-xl border border-[#C5C7CB]/20 bg-[#050505] px-4 py-3 text-[#F5F5F7] placeholder-[#9A9AA0] outline-none focus:border-[#E1121F]"
+                    className="w-full rounded-xl border border-[#C5C7CB]/20 bg-[#050505] px-4 py-3 text-[#F5F5F7] placeholder-[#9A9AA0] outline-none focus:border-[#C5C7CB]"
                   />
                 </div>
 
@@ -139,7 +139,7 @@ export default function Pricing() {
                     name="consent"
                     checked={form.consent}
                     onChange={onChange}
-                    className="mt-0.5 h-4 w-4 shrink-0 accent-[#E1121F]"
+                    className="mt-0.5 h-4 w-4 shrink-0 accent-[#C5C7CB]"
                   />
                   <span>Autorizo o NEXUS a me avisar via WhatsApp e e-mail sobre a abertura da 2ª Edição.</span>
                 </label>
@@ -149,7 +149,7 @@ export default function Pricing() {
                 <button
                   type="submit"
                   disabled={status === 'sending'}
-                  className="flex w-full items-center justify-center gap-2 rounded-full bg-[#E1121F] px-8 py-4 font-bold uppercase tracking-widest text-white transition-all hover:bg-[#A00D18] shadow-[0_0_25px_rgba(225,18,31,0.4)] disabled:opacity-60 mt-2"
+                  className="flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#F1F2F3] via-[#C5C7CB] to-[#979A9F] px-8 py-4 font-black uppercase tracking-widest text-[#050505] transition-all hover:from-white hover:to-[#C5C7CB] shadow-[0_0_25px_rgba(197,199,203,0.3)] disabled:opacity-60 mt-2"
                 >
                   <Send size={18} />
                   {status === 'sending' ? 'Garantindo sua vaga...' : 'Quero entrar na Lista VIP'}
