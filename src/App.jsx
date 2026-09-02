@@ -41,6 +41,10 @@ function Routes() {
       return <Galeria />;
     case '/manifesto':
       return <Manifesto />;
+    case '/hub':
+    case '/hub/':
+      window.location.href = '/hub/index.html';
+      return null;
     default:
       return <Home />;
   }

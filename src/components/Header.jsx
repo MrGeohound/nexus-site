@@ -14,15 +14,15 @@ export default function Header({ isRebranded = true }) {
   return (
     <header className={`fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 py-4 lg:px-12 backdrop-blur-md border-b transition-colors duration-700 ${
       isRebranded 
-        ? 'bg-[#0B0B0D]/90 border-[#C5C7CB]/15 text-[#F5F5F7]' 
-        : 'bg-[#12333A]/90 border-[#F8F3EA]/10 text-[#F8F3EA]'
+        ? 'bg-[#0B0B0D]/95 border-[#C5C7CB]/15 text-[#F5F5F7]' 
+        : 'bg-[#12333A]/95 border-[#F8F3EA]/10 text-[#F8F3EA]'
     }`}>
       <div className="flex items-center z-[60]">
-        <a href="/" onClick={(e) => { e.preventDefault(); navigate('/'); }} className="relative flex items-center justify-center w-28 h-10 md:w-36 md:h-12 hover:opacity-90 transition-opacity">
+        <a href="/" onClick={(e) => { e.preventDefault(); navigate('/'); }} className="relative flex items-center justify-start w-40 md:w-56 h-12 md:h-16 hover:opacity-90 transition-opacity">
           <img
             src={isRebranded ? "/assets/rebrand/logo-nexus-principal.png" : "/assets/logo-nexus-3.png"}
             alt="NEXUS"
-            className={isRebranded ? "h-[45px] md:h-[55px] object-contain" : "absolute top-[70%] left-1/2 -translate-x-1/2 -translate-y-1/2 h-[110px] md:h-[140px] max-w-none object-contain pointer-events-none"}
+            className={isRebranded ? "h-[60px] md:h-[75px] max-w-none object-contain scale-110" : "absolute top-[70%] left-1/2 -translate-x-1/2 -translate-y-1/2 h-[110px] md:h-[140px] max-w-none object-contain pointer-events-none"}
           />
         </a>
       </div>

@@ -90,7 +90,7 @@ export default function Hero({ isRebranded = true }) {
 
         {/* Main Content Container (Desktop - Above the Fold guaranteed) */}
         <main className="relative z-10 w-full px-8 xl:px-[8%] pt-20 pb-8 flex items-center min-h-screen">
-          <div className="w-full max-w-[500px] mr-auto">
+          <div className="w-full max-w-[520px] mr-auto">
             
             {/* Compact Glass Card */}
             <div className={`backdrop-blur-xl border rounded-3xl p-6 xl:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-colors duration-700 ${
@@ -102,7 +102,7 @@ export default function Hero({ isRebranded = true }) {
               <img 
                 src={isRebranded ? "/assets/rebrand/logo-nexus-principal.png" : "/assets/logo-nexus-2.png"} 
                 alt="NEXUS Conexão de Verdade" 
-                className="w-[160px] xl:w-[190px] mb-4 object-contain" 
+                className="w-[220px] xl:w-[260px] mb-4 object-contain" 
               />
 
               <h1 className="text-[26px] xl:text-[34px] font-inter font-extrabold tracking-tight leading-[1.1] mb-3">
@@ -217,7 +217,7 @@ export default function Hero({ isRebranded = true }) {
           <img 
             src={isRebranded ? "/assets/rebrand/logo-nexus-principal.png" : "/assets/logo-nexus-2.png"} 
             alt="NEXUS Conexão de Verdade" 
-            className="w-[160px] mb-4 object-contain" 
+            className="w-[200px] mb-4 object-contain" 
           />
 
           <h1 className="text-2xl font-extrabold tracking-tight leading-tight mb-3">
