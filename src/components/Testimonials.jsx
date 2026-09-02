@@ -42,18 +42,18 @@ const TESTIMONIALS = [
 
 export default function Testimonials() {
   return (
-    <section id="depoimentos" className="relative z-10 bg-[#12333A] py-24 px-6 lg:px-[10%] border-t border-[#F8F3EA]/10">
+    <section id="depoimentos" className="relative z-10 bg-[#050505] py-24 px-6 lg:px-[10%] border-t border-[#C5C7CB]/10">
       <div className="max-w-6xl mx-auto">
         
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#C8A96A]/40 bg-[#C8A96A]/10 text-[#C8A96A] text-xs font-bold uppercase tracking-widest mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#E1121F]/40 bg-[#E1121F]/10 text-[#E1121F] text-xs font-bold uppercase tracking-widest mb-4">
             <Award size={16} /> Depoimentos Autorizados
           </div>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-[#F8F3EA] tracking-tight mb-4">
+          <h2 className="text-3xl md:text-5xl font-extrabold text-[#F5F5F7] tracking-tight mb-4">
             O que os participantes disseram sobre a 1ª Edição
           </h2>
-          <p className="text-lg text-[#F8F3EA]/70 max-w-2xl mx-auto">
+          <p className="text-lg text-[#C5C7CB] max-w-2xl mx-auto">
             Avaliações reais colhidas logo após o encerramento do evento.
           </p>
         </div>
@@ -63,29 +63,29 @@ export default function Testimonials() {
           {TESTIMONIALS.map((t, idx) => (
             <div 
               key={idx}
-              className="relative flex flex-col justify-between rounded-2xl border border-[#F8F3EA]/10 bg-[#F8F3EA]/[0.03] p-6 hover:border-[#C8A96A]/40 hover:bg-[#F8F3EA]/[0.06] transition-all duration-300 group"
+              className="relative flex flex-col justify-between rounded-2xl border border-[#C5C7CB]/15 bg-[#0B0B0D] p-6 hover:border-[#E1121F]/50 transition-all duration-300 group shadow-lg"
             >
               <div className="mb-6">
                 <div className="flex items-center justify-between mb-4">
-                  <Quote size={28} className="text-[#C8A96A]/40 group-hover:text-[#C8A96A] transition-colors" />
-                  <div className="flex items-center gap-1.5 bg-[#C8A96A]/15 border border-[#C8A96A]/30 text-[#C8A96A] px-3 py-1 rounded-full text-xs font-extrabold">
-                    <Star size={12} className="fill-[#C8A96A]" />
+                  <Quote size={28} className="text-[#E1121F]/40 group-hover:text-[#E1121F] transition-colors" />
+                  <div className="flex items-center gap-1.5 bg-[#E1121F]/15 border border-[#E1121F]/30 text-[#E1121F] px-3 py-1 rounded-full text-xs font-extrabold">
+                    <Star size={12} className="fill-[#E1121F]" />
                     <span>Nota {t.rating}</span>
                   </div>
                 </div>
 
-                <p className="text-[#F8F3EA] text-base md:text-lg italic leading-relaxed">
+                <p className="text-[#F5F5F7] text-base md:text-lg italic leading-relaxed">
                   "{t.quote}"
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-[#F8F3EA]/10 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#C8A96A]/20 border border-[#C8A96A]/40 flex items-center justify-center text-[#C8A96A] font-bold text-sm">
+              <div className="pt-4 border-t border-[#C5C7CB]/10 flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-[#E1121F]/20 border border-[#E1121F]/40 flex items-center justify-center text-[#E1121F] font-bold text-sm">
                   {t.name.split(' ').map(n => n[0]).slice(0, 2).join('')}
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-[#F8F3EA]">{t.name}</h4>
-                  <p className="text-xs text-[#C8A96A]/80">{t.company}</p>
+                  <h4 className="text-sm font-bold text-[#F5F5F7]">{t.name}</h4>
+                  <p className="text-xs text-[#C5C7CB]">{t.company}</p>
                 </div>
               </div>
             </div>

@@ -1,56 +1,40 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, Shield, ArrowRight } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
-export default function RebrandTransition({ onTransitionComplete }) {
-  const [stage, setStage] = useState('idle'); // idle | morphing | rebranded
-  const [bannerVisible, setBannerVisible] = useState(false);
+export default function RebrandTransition() {
+  const [bannerVisible, setBannerVisible] = useState(true);
 
   useEffect(() => {
-    // Inicia a transição de rebranding após 1.5s de permanência na página
-    const timer1 = setTimeout(() => {
-      setStage('morphing');
-      setBannerVisible(true);
-      document.body.classList.add('rebranded');
-    }, 1500);
+    // Garante que o modo rebranded fique ativado no corpo
+    document.body.classList.add('rebranded');
 
-    const timer2 = setTimeout(() => {
+    const timer = setTimeout(() => {
       setBannerVisible(false);
-      setStage('rebranded');
-      if (onTransitionComplete) onTransitionComplete();
-    }, 4500);
+    }, 3500);
 
-    return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-    };
-  }, [onTransitionComplete]);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <>
-      {/* Red Light Pulse & Sweep Flash during transition */}
+      {/* Soft Red Pulse Flash initial reveal */}
       <div 
         className={`fixed inset-0 z-[100] pointer-events-none transition-opacity duration-1000 ${
-          stage === 'morphing' ? 'opacity-100' : 'opacity-0'
+          bannerVisible ? 'opacity-100' : 'opacity-0'
         }`}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-[#E1121F]/20 via-[#A00D18]/30 to-[#E1121F]/20 animate-pulse"></div>
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,#E1121F_0%,transparent_70%)] opacity-30"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,rgba(225,18,31,0.15)_0%,transparent_70%)] opacity-40"></div>
       </div>
 
-      {/* Rebrand Announcement Banner Overlay */}
+      {/* Rebrand Badge Notification */}
       {bannerVisible && (
-        <div className="fixed top-24 left-1/2 -translate-x-1/2 z-[110] w-[90%] max-w-xl animate-bounce-short">
-          <div className="bg-[#0B0B0D]/95 border-2 border-[#E1121F] rounded-2xl p-5 shadow-[0_0_50px_rgba(225,18,31,0.6)] backdrop-blur-xl text-center">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E1121F]/20 border border-[#E1121F]/50 text-[#E1121F] text-xs font-black uppercase tracking-widest mb-2">
-              <Sparkles size={14} className="animate-spin" /> REBRANDING OFFICIAL 2026
+        <div className="fixed top-20 left-1/2 -translate-x-1/2 z-[110] w-[90%] max-w-md transition-all duration-500">
+          <div className="bg-[#0B0B0D]/95 border border-[#E1121F] rounded-2xl p-4 shadow-[0_0_40px_rgba(225,18,31,0.5)] backdrop-blur-xl text-center">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E1121F]/20 border border-[#E1121F]/50 text-[#E1121F] text-[11px] font-black uppercase tracking-widest mb-1">
+              <Sparkles size={12} className="animate-spin" /> Identidade Visual 2026 Ativa
             </div>
-
-            <h3 className="text-xl md:text-2xl font-black text-[#F5F5F7] tracking-tight mb-1">
-              EVOLUÇÃO DO ECOSSISTEMA NEXUS
-            </h3>
-
-            <p className="text-xs md:text-sm text-[#C5C7CB]">
-              Nova identidade visual ativada: <strong className="text-[#E1121F]">Nexus Black</strong>, <strong className="text-[#E1121F]">Nexus Red</strong> & <strong className="text-[#C5C7CB]">Platinum Metal</strong>.
+            <p className="text-xs text-[#C5C7CB] font-semibold">
+              Ecossistema NEXUS em <strong className="text-white">Nexus Black, Red & Platinum</strong>.
             </p>
           </div>
         </div>

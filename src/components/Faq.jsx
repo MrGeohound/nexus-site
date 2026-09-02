@@ -40,11 +40,11 @@ export default function Faq() {
   };
 
   return (
-    <section id="faq" className="py-24 px-6 lg:px-[10%] relative z-10 bg-[#E8D8BE]">
+    <section id="faq" className="py-24 px-6 lg:px-[10%] relative z-10 bg-[#050505] border-t border-[#C5C7CB]/10">
       <div className="max-w-3xl mx-auto">
-        <h2 className="text-3xl md:text-5xl font-inter font-extrabold mb-12 tracking-tight text-center text-[#12333A]">
+        <h2 className="text-3xl md:text-5xl font-inter font-extrabold mb-12 tracking-tight text-center text-[#F5F5F7]">
           Dúvidas{' '}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B86B4B] to-[#C8A96A]">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E1121F] via-[#F5F5F7] to-[#C5C7CB]">
             Frequentes
           </span>
         </h2>
@@ -53,19 +53,19 @@ export default function Faq() {
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
-              <div key={index} className="bg-[#12333A]/5 border border-[#12333A]/10 rounded-2xl overflow-hidden transition-all duration-300">
+              <div key={index} className="bg-[#0B0B0D] border border-[#C5C7CB]/15 rounded-2xl overflow-hidden transition-all duration-300">
                 <button
                   onClick={() => toggleFaq(index)}
-                  className="w-full px-6 py-6 flex items-center justify-between text-left hover:bg-[#12333A]/10 transition-colors"
+                  className="w-full px-6 py-6 flex items-center justify-between text-left hover:bg-[#C5C7CB]/5 transition-colors"
                   aria-expanded={isOpen}
                 >
-                  <span className="text-lg font-bold font-inter text-[#12333A] pr-8">{faq.question}</span>
-                  <div className={`shrink-0 text-[#B86B4B] transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
+                  <span className="text-lg font-bold font-inter text-[#F5F5F7] pr-8">{faq.question}</span>
+                  <div className={`shrink-0 text-[#E1121F] transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
                     {isOpen ? <X size={24} /> : <Plus size={24} />}
                   </div>
                 </button>
                 <div className={`px-6 overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96 pb-6 opacity-100' : 'max-h-0 opacity-0'}`}>
-                  <p className="text-[#12333A]/70 font-inter leading-relaxed">{faq.answer}</p>
+                  <p className="text-[#C5C7CB] font-inter leading-relaxed">{faq.answer}</p>
                 </div>
               </div>
             );
