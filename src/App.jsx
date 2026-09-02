@@ -12,6 +12,8 @@ import HomeV2 from './pages/HomeV2';
 import HomeV3 from './pages/HomeV3';
 import Avaliacao from './pages/Avaliacao';
 import Galeria from './pages/Galeria';
+import Manifesto from './pages/Manifesto';
+import RebrandTransition from './components/RebrandTransition';
 
 function Routes() {
   const { path } = useRouter();
@@ -38,14 +40,21 @@ function Routes() {
       return <Avaliacao />;
     case '/galeria':
       return <Galeria />;
+    case '/manifesto':
+      return <Manifesto />;
     default:
-      return <Home />;
+      return (
+        <>
+          <RebrandTransition />
+          <Home />
+        </>
+      );
   }
 }
 
 function App() {
   return (
-    <div className="min-h-screen scroll-smooth overflow-x-hidden bg-[#12333A] font-inter text-[#F8F3EA]">
+    <div className="min-h-screen scroll-smooth overflow-x-hidden font-inter">
       <RouterProvider>
         <Routes />
         <ConsentBanner />

@@ -6,27 +6,30 @@ import { waLink } from '../lib/whatsapp.js';
 
 export default function Footer() {
   return (
-    <footer className="bg-[#12333A] border-t border-[#F8F3EA]/5 py-12 px-6 lg:px-[10%] relative z-10">
+    <footer className="bg-[#050505] border-t border-[#C5C7CB]/10 py-12 px-6 lg:px-[10%] relative z-10">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-        <a href="#home">
+        <Link to="/">
           <img
-            src="/assets/logo-nexus-2.png"
-            alt="NEXUS"
-            className="h-10 md:h-12 object-contain opacity-80 hover:opacity-100 transition-opacity"
+            src="/assets/rebrand/logo-nexus-2026-nobg.png"
+            alt="NEXUS 2026"
+            className="h-10 md:h-12 object-contain opacity-90 hover:opacity-100 transition-opacity"
           />
-        </a>
+        </Link>
 
-        <div className="text-[#F8F3EA]/40 text-sm font-inter text-center md:text-left">
+        <div className="text-[#9A9AA0] text-sm font-inter text-center md:text-left">
           &copy; 2026 NEXUS - Conexão de Verdade. Todos os direitos reservados.
-          <div className="mt-1 flex flex-wrap justify-center gap-4 md:justify-start">
-            <Link to="/privacidade" className="hover:text-[#C8A96A] transition-colors">
+          <div className="mt-2 flex flex-wrap justify-center gap-4 md:justify-start">
+            <Link to="/manifesto" className="text-[#E1121F] font-bold hover:underline transition-colors">
+              Manifesto do Ecossistema
+            </Link>
+            <Link to="/privacidade" className="hover:text-[#C5C7CB] transition-colors">
               Política de Privacidade
             </Link>
-            <Link to="/indique" className="hover:text-[#C8A96A] transition-colors">
+            <Link to="/indique" className="hover:text-[#C5C7CB] transition-colors">
               Indicar alguém
             </Link>
             {CONTACT.email && (
-              <a href={`mailto:${CONTACT.email}`} className="hover:text-[#C8A96A] transition-colors">
+              <a href={`mailto:${CONTACT.email}`} className="hover:text-[#C5C7CB] transition-colors">
                 Contato
               </a>
             )}
@@ -35,17 +38,17 @@ export default function Footer() {
 
         <div className="flex items-center gap-6">
           {SOCIAL.instagram && (
-            <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-[#F8F3EA]/40 hover:text-[#C8A96A] transition-colors">
+            <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-[#9A9AA0] hover:text-[#E1121F] transition-colors">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
             </a>
           )}
           {SOCIAL.linkedin && (
-            <a href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-[#F8F3EA]/40 hover:text-[#C8A96A] transition-colors">
+            <a href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-[#9A9AA0] hover:text-[#E1121F] transition-colors">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
             </a>
           )}
           {CONTACT.whatsappNumero && (
-            <a href={waLink('Olá! Tenho uma dúvida sobre o NEXUS.')} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" onClick={() => trackWhatsappClick('footer')} className="text-[#F8F3EA]/40 hover:text-[#C8A96A] transition-colors">
+            <a href={waLink('Olá! Tenho uma dúvida sobre o NEXUS.')} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" onClick={() => trackWhatsappClick('footer')} className="text-[#9A9AA0] hover:text-[#E1121F] transition-colors">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-2.8.8.8-2.7-.2-.3A8 8 0 1 1 12 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.1-.3.2-.5.1a6.5 6.5 0 0 1-3.2-2.8c-.2-.4.2-.4.6-1.2.1-.1 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3c-.2.2-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.2.7 3 .6.5 0 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1 0-.1-.2-.2-.4-.3z"/></svg>
             </a>
           )}
