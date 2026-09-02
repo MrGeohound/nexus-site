@@ -99,11 +99,11 @@ export default function Hero({ isRebranded = true }) {
                 : 'bg-[#12333A]/75 border-[#F8F3EA]/20 text-[#F8F3EA]'
             }`}>
               
-              {/* Tightly Cropped Logo */}
+              {/* Tightly Cropped Transparent Logo */}
               <img 
                 src={isRebranded ? "/assets/rebrand/logo-nexus-principal.png" : "/assets/logo-nexus-2.png"} 
                 alt="NEXUS Conexão de Verdade" 
-                className="h-[60px] xl:h-[75px] w-auto mb-5 object-contain" 
+                className="w-[260px] xl:w-[340px] h-auto mb-5 object-contain" 
               />
 
               <h1 className="text-[26px] xl:text-[34px] font-inter font-extrabold tracking-tight leading-[1.1] mb-3">
@@ -218,7 +218,7 @@ export default function Hero({ isRebranded = true }) {
           <img 
             src={isRebranded ? "/assets/rebrand/logo-nexus-principal.png" : "/assets/logo-nexus-2.png"} 
             alt="NEXUS Conexão de Verdade" 
-            className="h-[55px] w-auto mb-4 object-contain" 
+            className="w-[220px] sm:w-[260px] h-auto mb-4 object-contain" 
           />
 
           <h1 className="text-2xl font-extrabold tracking-tight leading-tight mb-3">

@@ -22,7 +22,7 @@ export default function Header({ isRebranded = true }) {
           <img
             src={isRebranded ? "/assets/rebrand/logo-nexus-principal.png" : "/assets/logo-nexus-3.png"}
             alt="NEXUS"
-            className={isRebranded ? "h-[45px] md:h-[60px] w-auto object-contain" : "h-[90px] md:h-[110px] object-contain"}
+            className={isRebranded ? "w-[170px] md:w-[240px] h-auto object-contain" : "h-[90px] md:h-[110px] object-contain"}
           />
         </a>
       </div>
