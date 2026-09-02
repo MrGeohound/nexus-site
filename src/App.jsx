@@ -13,7 +13,6 @@ import HomeV3 from './pages/HomeV3';
 import Avaliacao from './pages/Avaliacao';
 import Galeria from './pages/Galeria';
 import Manifesto from './pages/Manifesto';
-import RebrandTransition from './components/RebrandTransition';
 
 function Routes() {
   const { path } = useRouter();
@@ -43,12 +42,7 @@ function Routes() {
     case '/manifesto':
       return <Manifesto />;
     default:
-      return (
-        <>
-          <RebrandTransition />
-          <Home />
-        </>
-      );
+      return <Home />;
   }
 }
 
